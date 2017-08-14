@@ -1,4 +1,5 @@
 class AnimalsController < ApplicationController
+  skip_before_action :authenticate_user!, only: :home
   before_action :set_animal, only: [:show, :edit, :update, :destroy]
 
   def index
