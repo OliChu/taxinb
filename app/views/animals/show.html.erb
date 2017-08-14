@@ -1,0 +1,10 @@
+<h1><%= @animal.title %></h1>
+
+<p><%= @animal.address %></p>
+<p><%= @animal.description %></p>
+<p><%= @animal.daily_price %> €</p>
+
+<%= link_to 'Back', animals_path %>
+<%= link_to 'Edit', edit_animal_path(@animal) %>
+<%= link_to 'Delete', animal_path(@animal), method: :delete %>
+
