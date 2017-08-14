@@ -1,0 +1,10 @@
+<h1>Animal List</h1>
+
+<% @animals.each do |animal| %>
+  <%= link_to animal_path(animal) do %>
+  <p><%= animal.title %></p>
+  <p><%= animal.daily_price %> €</p>
+  <% end %>
+<% end %>
+
+<%= link_to 'New Animal', new_animal_path %>
