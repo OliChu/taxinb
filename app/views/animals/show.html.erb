@@ -1,20 +1,46 @@
-
 <div class="wrapper">
-  <div class="container">
-    <div class="banner">
-
-    </div>
-    <div class="row">
+  <div class="container fullsize">
       <div class="col-xs-8">
+
+        <div class="ligne">
           <h1><%= @animal.title %></h1>
           <p> <%= @animal.description %> </p>
+         </div>
+
+        <div class="ligne">
+        </div>
+
+         <div class="ligne">
+            <div class='product-body'>
+              <h3>Expérience proposée par</h3>
+              <p>Miaou</p>
+            </div>
+              <ul class="list-inline product-controls hidden-sm hidden-xs">
+              <li><a href=""><i class="fa fa-heart"></i></a></li>
+          </div>
+
+          <div class="ligne">
+            <h3>Disponibilités à venir</h3>
+          </div>
+
+          <div class="ligne">
+           <%= link_to 'Back', animals_path %>
+            <%= link_to 'Edit', edit_animal_path(@animal) %>
+            <%= link_to 'Delete', animal_path(@animal), method: :delete %>
+         </div>
       </div>
+
       <div class="col-xs-4">
         <div class="map-container">
-          <div class="profile_picture " style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= cl_image_path @animal.photo, crop: :fill %>')">
+          <div class="profile_picture ">
+          <%= cl_image_tag @animal.photo, height: 400, width: 400, crop: :fill %>
+          </div>
+           <div class="price.bouton">
+             <%= link_to 'Book', new_animal_booking_path(@animal) %>
+             <p><%= @animal.daily_price %> €</p>
           </div>
         </div>
+
       </div>
-    </div>
-  </div>
-</div>
+
+
