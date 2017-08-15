@@ -1,0 +1,21 @@
+<h1>fuck you</h1>
+
+<% @user.animals.each do |animal| %>
+  <%= animal.title %>
+  <p>bookings:</p>
+  <% animal.bookings.each do |booking| %>
+    <p>from:</p>
+    <%= booking.user.first_name %> <%= booking.user.last_name %>
+    <%= booking.start_date %>
+    <%= booking.end_date %>
+  <% end %>
+<% end %>
+
+<p>My bookings:</p>
+<% @user.bookings.each do |booking| %>
+  <%= cl_image_tag booking.animal.photo, height: 100, width: 100, crop: :fill %>
+  <%= booking.animal.title %>
+  <%= booking.user.first_name %> <%= booking.user.last_name %>
+  <%= booking.animal.address %>
+  <p>from</p> <%= booking.start_date %> <p>to</p> <%= booking.end_date %>
+<% end %>
