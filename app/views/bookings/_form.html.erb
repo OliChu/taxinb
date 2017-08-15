@@ -1,0 +1,5 @@
+<%= simple_form_for [@animal, @booking] do |f| %>
+  <%= f.text_field :start_date, placeholder: "Start date", class: 'datepicker'%>
+  <%= f.text_field :end_date, placeholder: "End date", class: 'datepicker'%>
+  <%= f.submit %>
+<% end %>
