@@ -8,5 +8,15 @@
 <%= link_to 'Back', animals_path %>
 <%= link_to 'Edit', edit_animal_path(@animal) %>
 <%= link_to 'Delete', animal_path(@animal), method: :delete %>
+<%= link_to 'Book', new_animal_booking_path(@animal) %>
 
-
+<h1>Booking</h1>
+<ul>
+  <% @animal.bookings.each do |booking| %>
+  <li>
+    <p><strong>Name</strong><%= booking.user.first_name %><%= booking.user.last_name %></p>
+    <p><strong>Start Date</strong><%= booking.start_date %></p>
+    <p><strong>End Date</strong><%= booking.end_date %></p>
+  </li>
+  <% end %>
+</ul>

@@ -19,6 +19,7 @@ gem 'uglifier'
 gem 'devise'
 gem 'cloudinary'
 gem 'carrierwave', '~> 0.11.2'
+gem 'bootstrap-datepicker-rails', '~> 1.6', '>= 1.6.4.1'
 gem 'omniauth-facebook'
 
 

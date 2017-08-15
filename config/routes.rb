@@ -4,5 +4,7 @@ Rails.application.routes.draw do
 
   root to: 'animals#index'
 
-  resources :animals
+  resources :animals do
+    resources :bookings
+  end
 end
