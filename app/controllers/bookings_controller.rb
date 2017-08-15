@@ -19,6 +19,8 @@ class BookingsController < ApplicationController
     @booking = Booking.new(booking_params)
     @booking.animal = @animal
     @booking.user = current_user
+    @booking.price = (@booking.end_date - @booking.end_date) * @animal.daily_price
+    @booking.status = "Pending"
     if @booking.save
       redirect_to animal_path(@animal)
     else
