@@ -1,0 +1,26 @@
+.card {
+  height: 200px;
+  width: 200px;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.6);
+  background-size: cover !important;
+  background-position: center;
+  color: white;
+  position: relative;
+  margin: 0;
+  margin-bottom: 20px;
+  border-radius: 5px;
+}
+.card-name {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-size: 25px;
+  text-transform: uppercase;
+}
+.card-link {
+   background: black;
+   opacity: 1;
+}
+.card:hover {
+  opacity: 0.7;
+}
