@@ -1,25 +1,47 @@
-<h1>Animal List</h1>
-
-<% @animals.each do |animal| %>
-  <%= link_to animal_path(animal) do %>
-  <p><%= animal.title %></p>
-  <p><%= animal.daily_price %> €</p>
-  <% end %>
-<% end %>
-
-<%= link_to 'New Animal', new_animal_path %>
-
-
-    <div class="card" style="background-image: url(images/rio.jpg)">Rio
+<div class="wrapper">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 col-xs-6 row-titles">
+        <h2>Animal List</h2>
+      </div>
     </div>
-    <div class="card" style="background-image: url(images/berlin.jpg)">
-      Berlin
+    <div class="row">
+      <div class="col-xs-6 col-sm-8 ">
+         <div class="row">
+          <% @animals.each do |animal| %>
+            <%= link_to animal_path(animal) do %>
+              <div class="col-xs-12 col-sm-6 col-md-4   ">
+                <div class="card " style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= cl_image_path animal.photo, crop: :fill %>')">
+                  <div class="card-name"><%= animal.title %></div>
+                </div>
+              </div>
+            <% end %>
+          <% end %>
+          </div>
+      </div>
+      <div class="col-xs-6 col-sm-4 ">
+        <div class="map-container">
+          <div id="map"></div>
+        </div>
+      </div>
     </div>
-    <div class="card" style="background-image: url(images/shanghai.jpg)">
-      Shanghai
-    </div>
-    <div class="card" style="background-image: url(images/barcelona.jpg)">
-      Barcelona
-    </div>
-
-    <div id="map"></div>
+  </div>
+</div>
+<script>
+      function initMap() {
+        // Create a map object and specify the DOM element for display.
+        var map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: 52.5206, lng: 13.4098},
+          scrollwheel: false,
+          zoom: 8
+        });
+      }
+    </script>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- Gmaps JavaScript -->
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCzER7O10ZOUp7FloJzMe2r8X1GIQhgt7Q&callback=initMap">
+    </script>
