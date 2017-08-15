@@ -7,4 +7,7 @@ Rails.application.routes.draw do
   resources :animals do
     resources :bookings
   end
+
+
+
 end
