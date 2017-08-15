@@ -59,6 +59,11 @@ wolf.remote_photo_url="http://boredomtherapy.com/wp-content/uploads/2014/05/bad-
 wolf.user = olivier
 wolf.save
 
+mole = Animal.new(title: "Magic Marley Mole" , description: " As it gradually achieved an important position within the security defences of a certain country, Magic Marley Mole was feeding the names of operatives. The operation turned sour and our mole went rogue. She has now kind of found her feet. Comfort and discretion for romantic nights by the fireplace.", address: "6 Rue Léon Frot, 75011 Paris", daily_price: 32)
+mole.remote_photo_url="http://i.dailymail.co.uk/i/pix/2011/07/13/article-2014186-0CFD340C00000578-445_634x530.jpg"
+mole.user = morgan
+mole.save
+
 puts "done"
 
 
