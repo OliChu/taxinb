@@ -1,21 +1,25 @@
 <div class="wrapper">
   <div class="container">
     <div class="row">
-      <div class="col-xs-8 row-titles">
+      <div class="col-md-6 col-xs-6 row-titles">
         <h2>Animal List</h2>
       </div>
-      <div class="col-xs-8">
+    </div>
+    <div class="row">
+      <div class="col-xs-6 col-sm-8 ">
+         <div class="row">
           <% @animals.each do |animal| %>
             <%= link_to animal_path(animal) do %>
-              <div class="col-xs-4">
+              <div class="col-xs-12 col-sm-6 col-md-4   ">
                 <div class="card " style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= cl_image_path animal.photo, crop: :fill %>')">
                   <div class="card-name"><%= animal.title %></div>
                 </div>
               </div>
             <% end %>
           <% end %>
+          </div>
       </div>
-      <div class="col-xs-4">
+      <div class="col-xs-6 col-sm-4 ">
         <div class="map-container">
           <div id="map"></div>
         </div>
