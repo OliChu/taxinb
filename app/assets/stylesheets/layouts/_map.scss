@@ -1,0 +1,13 @@
+.content {
+  display: flex;
+  align-items: stretch;
+}
+
+/* We just give you a Gmaps with random width/height */
+#map {
+  width: 450px;
+  height: 100vh;
+  position: sticky !important;
+  top: 0 !important;
+  padding-right: 20px;
+}
