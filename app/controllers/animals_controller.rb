@@ -1,6 +1,6 @@
 class AnimalsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:show, :index]
-  before_action :set_animal, only: [:show, :edit, :update, :destroy]
+  before_action :set_animal, only: [:show, :edit, :update, :destroy, :rating]
 
   def index
     @animals = Animal.where.not(latitude: nil, longitude: nil)
