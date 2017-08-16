@@ -2,10 +2,12 @@
   <div class="container fullsize">
       <div class="col-xs-8">
 
-        <div class="ligne">
+        <div id="animal_title">
           <h1><%= @animal.title %></h1>
-          <p> <%= @animal.description %> </p>
-         </div>
+            <div id="animal_description">
+              <p> <%= @animal.description %> </p>
+           </div>
+        </div>
 
         <div class="ligne">
         </div>
@@ -43,4 +45,23 @@
 
       </div>
 
+
+<div id="map"></div>
+<% content_for(:after_js) do %>
+  <%= javascript_tag do %>
+    $(document).ready(function() {
+      var handler = Gmaps.build('Google');
+      handler.buildMap({ internal: { id: 'map' } }, function() {
+        markers = handler.addMarkers(<%= raw @hash.to_json %>);
+        handler.bounds.extendWith(markers);
+        handler.fitMapToBounds();
+        if (markers.length == 0) {
+          handler.getMap().setZoom(2);
+        } else if (markers.length == 1) {
+          handler.getMap().setZoom(14);
+        }
+      });
+    });
+  <% end %>
+<% end %>
 
