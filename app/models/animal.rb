@@ -3,6 +3,8 @@ class Animal < ApplicationRecord
   has_many :bookings
   mount_uploader :photo, PhotoUploader
   validates :title, :description, :address, :daily_price, :photo, presence: true
+  geocoded_by :address
+  after_validation :geocode, if: :address_changed?
 
   def rating
     @bookings = bookings.reject { |b| b.review.nil? }
@@ -19,5 +21,6 @@ class Animal < ApplicationRecord
       return [full, half, empty]
     end
   end
+
 end
 
