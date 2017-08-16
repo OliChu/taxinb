@@ -1,5 +1,6 @@
 .card-container {
   height: 270px;
+  width: 200px;
 }
 .card {
   height: 200px;
@@ -29,9 +30,9 @@
 }
 
 .card-info {
-  #price, #rating {
+  #rating {
     margin: 0;
-    color: black;
+    color: $green;
   }
   li {
     padding: 0;
@@ -53,3 +54,12 @@
 #no-review {
   color: rgb(180, 180, 180);
 }
+
+#price {
+  font-weight: bold;
+  text-align: center;
+  margin: 0;
+  color: black;
+}
+
+
