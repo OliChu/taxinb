@@ -3,10 +3,7 @@
 }
 
 .general_content {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 1px solid #DBDBDB;
+
   h3 {
     margin: 0;
   }
@@ -38,4 +35,8 @@
   margin-top: 20px;
   border-bottom: 1px solid #DBDBDB;
   padding-bottom: 20px;
+}
+
+#avatar {
+  padding-top: 10px;
 }
