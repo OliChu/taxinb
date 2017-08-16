@@ -2,27 +2,92 @@
 
 
 <div class="container">
-  <div class="row">
-    <div class="col-xs-12">
-      <% @user.bookings.each do |booking| %>
-          <%= link_to animal_path(booking.animal) do %>
-            <div class="product">
-              <div class='product -upvote'>
-                <div class='product-count'><%= booking.price %>€</div>
+
+  <% if @user.bookings.any? { |booking| booking.end_date.to_time.to_i > Time.now.to_i } %>
+    <div class="row">
+      <div class="col-xs-12">
+        <h2>Upcoming bookings</h2>
+        <% @user.bookings.each do |booking| %>
+          <% if booking.start_date.to_time.to_i > Time.now.to_i  %>
+            <%= link_to animal_path(booking.animal) do %>
+              <div class="product">
+                <div class='product -upvote'>
+                  <div class='product-count'><%= booking.price %>€</div>
+                </div>
+                <%= image_tag booking.animal.photo, class: "product-image hidden-xs"%>
+                <div class='product-body'>
+                  <h3><%= booking.animal.title %></h3>
+                  <h6><%= booking.user.first_name %> <%= booking.user.last_name %></h6>
+                  <p><%= booking.animal.address %></p>
+                </div>
+                <ul class="list-inline product-controls hidden-sm hidden-xs">
+                  <li><%= booking.status %></li>
+                  <li><%= booking.start_date %> / <%= booking.end_date %></li>
+                </ul>
               </div>
-              <%= image_tag booking.animal.photo, class: "product-image hidden-xs"%>
-              <div class='product-body'>
-                <h3><%= booking.animal.title %></h3>
-                <h6><%= booking.user.first_name %> <%= booking.user.last_name %></h6>
-                <p><%= booking.animal.address %></p>
-              </div>
-              <ul class="list-inline product-controls hidden-sm hidden-xs">
-                <li><%= booking.status %></li>
-                <li><%= booking.start_date %> / <%= booking.end_date %></li>
-              </ul>
-            </div>
+            <% end %>
           <% end %>
-      <% end %>
+        <% end %>
+      </div>
     </div>
-  </div>
+  <% end %>
+
+  <% if @user.bookings.any? { |booking| booking.start_date.to_time.to_i <= Time.now.to_i && booking.end_date.to_time.to_i > Time.now.to_i } %>
+    <div class="row">
+      <div class="col-xs-12">
+        <h2>Current bookings</h2>
+        <% @user.bookings.each do |booking| %>
+          <% if booking.start_date.to_time.to_i <= Time.now.to_i && booking.end_date.to_time.to_i > Time.now.to_i %>
+            <%= link_to animal_path(booking.animal) do %>
+              <div class="product">
+                <div class='product -upvote'>
+                  <div class='product-count'><%= booking.price %>€</div>
+                </div>
+                <%= image_tag booking.animal.photo, class: "product-image hidden-xs"%>
+                <div class='product-body'>
+                  <h3><%= booking.animal.title %></h3>
+                  <h6><%= booking.user.first_name %> <%= booking.user.last_name %></h6>
+                  <p><%= booking.animal.address %></p>
+                </div>
+                <ul class="list-inline product-controls hidden-sm hidden-xs">
+                  <li><%= booking.status %></li>
+                  <li><%= booking.start_date %> / <%= booking.end_date %></li>
+                </ul>
+              </div>
+            <% end %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+
+  <% if @user.bookings.any? { |booking| booking.end_date.to_time.to_i < Time.now.to_i } %>
+    <div class="row">
+      <div class="col-xs-12">
+        <h2>Past bookings</h2>
+        <% @user.bookings.each do |booking| %>
+          <% if booking.end_date.to_time.to_i < Time.now.to_i %>
+            <%= link_to animal_path(booking.animal) do %>
+              <div class="product">
+                <div class='product -upvote'>
+                  <div class='product-count'><%= booking.price %>€</div>
+                </div>
+                <%= image_tag booking.animal.photo, class: "product-image hidden-xs"%>
+                <div class='product-body'>
+                  <h3><%= booking.animal.title %></h3>
+                  <h6><%= booking.user.first_name %> <%= booking.user.last_name %></h6>
+                  <p><%= booking.animal.address %></p>
+                </div>
+                <ul class="list-inline product-controls hidden-sm hidden-xs">
+                  <li><%= booking.status %></li>
+                  <li><%= booking.start_date %> / <%= booking.end_date %></li>
+                </ul>
+              </div>
+            <% end %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+
 </div>
