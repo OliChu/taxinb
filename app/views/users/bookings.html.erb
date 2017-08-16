@@ -3,10 +3,10 @@
 
 <div class="container">
 
-  <% if @user.bookings.any? { |booking| booking.end_date.to_time.to_i > Time.now.to_i } %>
+  <% if @user.bookings.any? { |booking| booking.start_date.to_time.to_i > Time.now.to_i } %>
     <div class="row">
       <div class="col-xs-12">
-        <h2>Future bookings</h2>
+        <h2>Future booking(s)</h2>
         <% @user.bookings.each do |booking| %>
           <% if booking.start_date.to_time.to_i > Time.now.to_i  %>
             <%= link_to animal_path(booking.animal) do %>
