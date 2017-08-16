@@ -1,5 +1,44 @@
 <%= render 'shared/profile_header' %>
 
+<div class="container">
+  <% if @user.bookings.any? { |booking| booking.end_date.to_time.to_i < Time.now.to_i } %>
+    <div class="row">
+      <div class="col-xs-12">
+        <h2>Bookings to review</h2>
+        <% @user.bookings.each do |booking| %>
+          <% if booking.end_date.to_time.to_i < Time.now.to_i %>
+            <%= link_to animal_path(booking.animal) do %>
+              <div class="product">
+                <div class='product -upvote'>
+                  <div class='product-count'><%= booking.price %>€</div>
+                </div>
+                <%= image_tag booking.animal.photo, class: "product-image hidden-xs"%>
+                <div class='product-body'>
+                  <h3><%= booking.animal.title %></h3>
+                  <h6><%= booking.user.first_name %> <%= booking.user.last_name %></h6>
+                  <p><%= booking.animal.address %></p>
+                </div>
+                <%= link_to 'review', new_animal_booking_review_path(booking.animal, booking), {class: "btn btn-primary product-controls"} %>
+              </div>
+            <% end %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
 
-<h1>mes reviews</h1>
-<h1>mes reviews reçues</h1>
+
+  <div class="row">
+    <div class="col-xs-12">
+      <h2>All reviews</h2>
+      <% @user.bookings.each do |booking| %>
+        <% if booking.review  %>
+          <%= booking.review.comment %>
+          <%= booking.review.rating %>
+        <% end  %>
+      <% end  %>
+    </div>
+  </div>
+</div>
+
+
