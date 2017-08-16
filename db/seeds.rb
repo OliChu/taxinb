@@ -6,6 +6,7 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 puts "starts destroying"
+Booking.destroy_all
 classes = [Animal, User]
 classes.each do |c|
   c.destroy_all

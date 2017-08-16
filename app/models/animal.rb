@@ -3,4 +3,6 @@ class Animal < ApplicationRecord
   has_many :bookings
   mount_uploader :photo, PhotoUploader
   validates :title, :description, :address, :daily_price, :photo, presence: true
+  geocoded_by :address
+  after_validation :geocode, if: :address_changed?
 end
