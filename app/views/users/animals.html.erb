@@ -16,43 +16,45 @@
     <% end %>
   </div>
 
-  <% @user.animals.each do |animal| %>
-    <% if animal.bookings.any? { |booking| booking.end_date.to_time.to_i > Time.now.to_i } %>
-      <div class="row">
-        <div class="col-xs-12">
-          <h2>Future bookings</h2>
-          <% animal.bookings.each do |booking| %>
-            <% if booking.start_date.to_time.to_i > Time.now.to_i  %>
-              <div class="message">
-                 <% avatar_url = booking.user.facebook_picture_url || "http://placehold.it/30x30" %>
-                 <%= image_tag avatar_url, class: "avatar large" %>
-                <div class="message-name">
-                  <h3><%= booking.user.first_name %> <%= booking.user.last_name %></h3>
-                  <p> </p>
-                </div>
-                <div class="message-body">
-                  <p>Booking request for <strong><%= booking.animal.title %></strong></p>
-                  <p>
-                    from <%= booking.start_date %> to <%= booking.end_date %>
-                  </p>
-                </div>
-                <div class="message-status">
-                  <p class="status pending"><%= booking.status %></p>
-                  <p class="price"><%= booking.price %>€</p>
-                </div>
-              </div>
-            <% end %>
-          <% end  %>
-        </div>
-      </div>
-    <% end %>
-  <% end %>
 
-  <% @user.animals.each do |animal| %>
-    <% if animal.bookings.any? { |booking| booking.start_date.to_time.to_i <= Time.now.to_i && booking.end_date.to_time.to_i > Time.now.to_i } %>
-      <div class="row">
-        <div class="col-xs-12">
-          <h2>Current bookings</h2>
+  <% if Booking.where(animal_id: @user.animals).any? { |booking| booking.start_date.to_time.to_i > Time.now.to_i } %>
+        <div class="row">
+          <div class="col-xs-12">
+            <h2>Future bookings</h2>
+            <% @user.animals.each do |animal| %>
+              <% animal.bookings.each do |booking| %>
+                <% if booking.start_date.to_time.to_i > Time.now.to_i  %>
+                  <div class="message">
+                     <% avatar_url = booking.user.facebook_picture_url || "http://placehold.it/30x30" %>
+                     <%= image_tag avatar_url, class: "avatar large" %>
+                    <div class="message-name">
+                      <h3><%= booking.user.first_name %> <%= booking.user.last_name %></h3>
+                      <p> </p>
+                    </div>
+                    <div class="message-body">
+                      <p>Booking request for <strong><%= booking.animal.title %></strong></p>
+                      <p>
+                        from <%= booking.start_date %> to <%= booking.end_date %>
+                      </p>
+                    </div>
+                    <div class="message-status">
+                      <p class="status pending"><%= booking.status %></p>
+                      <p class="price"><%= booking.price %>€</p>
+                    </div>
+                  </div>
+                <% end %>
+              <% end  %>
+            <% end %>
+          </div>
+        </div>
+    <% end %>
+
+
+  <% if Booking.where(animal_id: @user.animals).any? { |booking| booking.start_date.to_time.to_i <= Time.now.to_i && booking.end_date.to_time.to_i > Time.now.to_i } %>
+    <div class="row">
+      <div class="col-xs-12">
+        <h2>Current bookings</h2>
+        <% @user.animals.each do |animal| %>
           <% animal.bookings.each do |booking| %>
             <% if booking.start_date.to_time.to_i <= Time.now.to_i && booking.end_date.to_time.to_i > Time.now.to_i  %>
               <div class="message">
@@ -74,17 +76,17 @@
                 </div>
               </div>
             <% end %>
-          <% end  %>
-        </div>
+          <% end %>
+        <% end %>
       </div>
-    <% end %>
+    </div>
   <% end %>
 
-  <% @user.animals.each do |animal| %>
-    <% if animal.bookings.any? { |booking| booking.end_date.to_time.to_i < Time.now.to_i } %>
-      <div class="row">
-        <div class="col-xs-12">
-          <h2>Past bookings</h2>
+  <% if Booking.where(animal_id: @user.animals).any? { |booking| booking.end_date.to_time.to_i < Time.now.to_i } %>
+    <div class="row">
+      <div class="col-xs-12">
+        <h2>Past bookings</h2>
+        <% @user.animals.each do |animal| %>
           <% animal.bookings.each do |booking| %>
             <% if booking.end_date.to_time.to_i < Time.now.to_i %>
               <div class="message">
@@ -106,10 +108,10 @@
                 </div>
               </div>
             <% end %>
-          <% end  %>
-        </div>
+          <% end %>
+        <% end %>
       </div>
-    <% end %>
+    </div>
   <% end %>
 
 </div>

@@ -1,5 +1,5 @@
 .tabs {
-  background: #F4F4F4;
+  background: white;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -35,6 +35,6 @@
   border-radius: 0 10px 0 0;
 }
 .tab.active {
-  background: white;
+  background: #F4F4F4;
   color: black;
 }
