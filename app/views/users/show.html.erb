@@ -1,6 +1,6 @@
 <%= render 'shared/profile_header' %>
 
-
+<div class="container">
   <% if @user.bookings.any? { |booking| booking.end_date.to_time.to_i < Time.now.to_i } %>
     <div class="row">
       <div class="col-xs-12">
@@ -18,9 +18,7 @@
                   <h6><%= booking.user.first_name %> <%= booking.user.last_name %></h6>
                   <p><%= booking.animal.address %></p>
                 </div>
-                <ul class="list-inline product-controls hidden-sm hidden-xs">
-                  <%= link_to booking.review, new_animal_booking_review(booking.animal), {class: "btn btn-primary"} %>
-                </ul>
+                <%= link_to 'review', new_animal_booking_review_path(booking.animal, booking), {class: "btn btn-primary product-controls"} %>
               </div>
             <% end %>
           <% end %>
@@ -30,5 +28,17 @@
   <% end %>
 
 
-<h1>mes reviews</h1>
-<h1>mes reviews reçues</h1>
+  <div class="row">
+    <div class="col-xs-12">
+      <h2>All reviews</h2>
+      <% @user.bookings.each do |booking| %>
+        <% if booking.review  %>
+          <%= booking.review.comment %>
+          <%= booking.review.rating %>
+        <% end  %>
+      <% end  %>
+    </div>
+  </div>
+</div>
+
+
