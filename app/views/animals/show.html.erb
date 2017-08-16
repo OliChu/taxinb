@@ -11,6 +11,24 @@
                   <div class="title">
                     <h1><%= @animal.title %></h1>
                   </div>
+                  <div class="stars">
+                      <p id="rating">Rating:</p>
+                      <% if @animal.rating == 0 %>
+                        <p id="no-review">Not rated yet</p>
+                      <% else %>
+                        <ul class="list-inline">
+                          <% @animal.rating[0].times do %>
+                            <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                          <% end %>
+                          <% if @animal.rating[1] != 0 %>
+                            <li><i class="fa fa-star-half-o" aria-hidden="true"></i></li>
+                          <% end %>
+                          <% @animal.rating[2].times do %>
+                            <li><i class="fa fa-star-o" aria-hidden="true"></i></li>
+                          <% end %>
+                        </ul>
+                      <% end %>
+                    </div>
                 </div>
                 <div class="col-xs-2">
                   <div class="animal-actions text-right">
@@ -28,13 +46,19 @@
               <p> <%= @animal.description %> </p>
             </div>
 
-            <div class="general_content box-design">
-              <h3>Property of</h3>
-              <p> <%= @animal.user.first_name %> <%= @animal.user.last_name %></p>
-              <div id="owner-profile-picture avatar ">
-                <%= image_tag @animal.photo, height: 60, width: 60, style:"border-radius: 50px;" %>
-              </div>
-            </div>
+            <div class="row  box-design">
+                <div class="col-xs-10">
+                  <div class="general_content">
+                    <h3>Property of</h3>
+                    <p> <%= @animal.user.first_name %> <%= @animal.user.last_name %></p>
+                  </div>
+                </div>
+                  <div class="col-xs-2">
+                    <div id=" avatar text-center">
+                      <%= image_tag @animal.photo, height: 60, width: 60, style:"border-radius: 50px;" %>
+                    </div>
+                  </div>
+                </div>
 
             <div class="booking-form form-inline">
               <%= simple_form_for [@animal, @booking] do |f| %>
