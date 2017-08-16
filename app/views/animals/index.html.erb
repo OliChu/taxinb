@@ -1,7 +1,7 @@
 <div class="wrapper">
   <div class="container">
     <div class="row">
-      <div class="col-md-6 col-xs-6 row-titles">
+      <div class="col-md-8 col-xs-4 row-titles">
         <h2>Animal List</h2>
       </div>
     </div>
@@ -16,11 +16,11 @@
                     <div class="card-name"><%= animal.title %></div>
                   </div>
                   <div class="card-info">
-                    <p id="price">Price: <%= animal.daily_price %>€ / day</p>
+                    <p id="price"><%= animal.daily_price %>€ / day</p>
                     <div class="stars">
                       <p id="rating">Rating:</p>
                       <% if animal.rating == 0 %>
-                        <p id="no-review">No rated yet</p>
+                        <p id="no-review">Not rated yet</p>
                       <% else %>
                         <ul class="list-inline">
                           <% animal.rating[0].times do %>
