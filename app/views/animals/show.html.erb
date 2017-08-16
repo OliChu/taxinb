@@ -1,80 +1,63 @@
- <div class="wrapper">
-  <div class="container fullsize">
-      <div class="col-xs-12 col-sm-6 col-sm-offset-1">
-          <div id="animal_title" class="box-design">
-            <h1><%= @animal.title %></h1>
-              <div id="animal_description">
-                <p> <%= @animal.description %> </p>
-             </div>
-          </div>
+<div class="wrapper">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-8">
+        <div class="row">
+          <div class="col-xs-12">
 
-          <div class="row">
-            <div class="general_content" class="box-design">
-              <div id='owner-profile'>
-                <h3>Animal proposée par</h3>
-                <p> <%= @animal.user %> </p>
+            <div class="box-design">
+              <div class="row">
+                <div class="col-xs-10">
+                  <div class="title">
+                    <h1><%= @animal.title %></h1>
+                  </div>
+                </div>
+                <div class="col-xs-2">
+                  <div class="animal-actions text-right">
+                    <% if current_user = @animal.user %>
+                      <%= link_to edit_animal_path(@animal) do %>
+                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                      <% end %>
+                      <%= link_to animal_path(@animal), method: :delete do %>
+                        <i class="fa fa-trash" aria-hidden="true"></i>
+                      <% end %>
+                    <% end %>
+                  </div>
+                </div>
               </div>
-              <div id="owner-profile-picture avatar ">
-                 <%= image_tag @animal.photo, height: 60, width: 60, style:"border-radius: 50px;" %>
+              <p> <%= @animal.description %> </p>
             </div>
+
+            <div class="general_content box-design">
+              <h3>Property of</h3>
+              <p> <%= @animal.user.first_name %> <%= @animal.user.last_name %></p>
+              <div id="owner-profile-picture avatar ">
+                <%= image_tag @animal.photo, height: 60, width: 60, style:"border-radius: 50px;" %>
+              </div>
+            </div>
+
+            <div class="booking-form form-inline">
+              <%= simple_form_for [@animal, @booking] do |f| %>
+                <%= f.text_field :start_date, placeholder: "Start date", class: 'datepicker form-control'%>
+                <%= f.text_field :end_date, placeholder: "End date", class: 'datepicker form-control'%>
+                <%= f.button :submit, class: "btn form-control btn-success" %>
+              <% end %>
+            </div>
+
+
           </div>
         </div>
-
-        <div class="ligne">
-          <h3>Disponibilités à venir</h3>
-        </div>
-        <div class="ligne">
-          <%= link_to 'Back', animals_path %>
-          <%= link_to 'Edit', edit_animal_path(@animal) %>
-          <%= link_to 'Delete', animal_path(@animal), method: :delete %>
-        </div>
       </div>
-
       <div class="col-xs-4">
-        <div class="map-container">
-          <div class="profile_picture ">
-          <%= cl_image_tag @animal.photo, height: 400, width: 400, crop: :fill, style:" box-shadow: 0 1px 2px rgba(0,0,0,0.2);
-          border: white 1px solid;" %>
-          </div>
-           <div class="price.bouton">
-             <p><%= @animal.daily_price %> €</p>
-          </div>
-        </div>
-         <div class="row">
-            <form action="" id="flat-form">
-              <h2>Book this animal</h2>
-                <div class="form-group">
-                  <div class="row">
-                    <div class="col-xs-6">
-                      <input type="text" placeholder="first_day" class="form-control">
-                    </div>
-                    <div class="col-xs-6">
-                      <input type="text" placeholder="last_day"   class="form-control">
-                    </div>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <div class="row">
-                    <div class="col-xs-12">
-                      <select name="" id="" class="form-control">
-                      <option value="1">1 day</option>
-                      <option value="2">2 days</option>
-                      <option value="3">3 days</option>
-                      </select>
-                    </div>
-                </div>
-              </div>
-              <div class="form-group">
-                <div class="row">
-                  <div class="col-xs-12">
-                    <%= link_to 'Book', new_animal_booking_path(@animal) %>
-                  </div>
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
+        <%= cl_image_tag @animal.photo, height: 400, width: 400, crop: :fill, style:" box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+        border: white 1px solid;" %>
       </div>
+    </div>
+  </div>
+</div>
+
+
+
 
 
 <div id="map"></div>
