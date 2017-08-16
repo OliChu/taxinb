@@ -1,3 +1,6 @@
+.card-container {
+  height: 270px;
+}
 .card {
   height: 200px;
   width: 200px;
@@ -7,7 +10,7 @@
   color: white;
   position: relative;
   margin: 0;
-  margin-bottom: 20px;
+  // margin-bottom: 20px;
   border-radius: 5px;
 }
 .card-name {
@@ -23,4 +26,30 @@
 }
 .card:hover {
   opacity: 0.7;
+}
+
+.card-info {
+  #price, #rating {
+    margin: 0;
+    color: black;
+  }
+  li {
+    padding: 0;
+  }
+}
+
+#rating {
+  padding-right: 10px;
+}
+
+.stars {
+  display: flex;
+  justify-content: left;
+  li {
+    color: #C62727;
+  }
+}
+
+#no-review {
+  color: rgb(180, 180, 180);
 }
