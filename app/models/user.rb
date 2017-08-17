@@ -28,6 +28,7 @@ class User < ApplicationRecord
     return user
   end
 
+
   def nb_reviews
     @bookings = bookings
     count = 0
