@@ -6,9 +6,8 @@
           <%= image_tag avatar_url, class: "avatar" %>
           <h1>Hello <%= @user.first_name %> <%= @user.last_name %></h1>
           <h5>Taxidermist since <%= @user.created_at.strftime("%B %d %Y") %></h5>
-        <div class="tabs">
-          <%= link_to 'Reviews', profile_path, class: "tab active" %>
-          <%= link_to 'Bookings', profile_bookings_path, class: "tab" %>
+        <div class="tabs" id="border">
+          <%= link_to 'Bookings', profile_path, class: "tab active" %>
           <%= link_to 'Rentals', profile_animals_path, class: "tab" %>
         </div>
       </div>

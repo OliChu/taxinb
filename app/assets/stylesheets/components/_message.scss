@@ -8,11 +8,12 @@
   margin-bottom: 15px;
   display: flex;
   align-items: center;
-  border-bottom: 1px solid rgba(220,224,244,0.4);
   text-decoration: none;
+  border: 2px solid black;
 }
-.message:last-child {
-  border-bottom: none;
+
+.message:hover {
+  background: #FFFFE0;
 }
 
 .message .avatar {
@@ -30,11 +31,9 @@
 }
 
 .message-body h3 {
-  color: rgba(0, 0, 0, 0.4);
   font-size: 13px;
   font-weight: lighter;
   margin: 0px;
-  opacity: 0.6;
 }
 .message-body strong {
   color: rgba(0,0,0,0.9);
@@ -44,6 +43,7 @@
 .message-name {
   padding-left: 10px;
   min-width: 150px;
+  color: rgba(0,0,0,0.7);
 }
 .message-name h2 {
   font-size: 13px;
@@ -61,6 +61,7 @@
 .message-status {
   font-size: 14px;
   font-weight: bold;
+  color: rgba(0,0,0,0.7);
 }
 .status.accepted {
   color: #04A366;

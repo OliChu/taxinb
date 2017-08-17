@@ -1,69 +1,72 @@
 <%= render 'shared/profile_header' %>
 
-<% if @user.animals.any? %>
-  <div class="container">
-    <div class="row">
-      <div class="col-xs-12">
-        <h2>Your Animals</h2>
-        <div class="message-container">
-          <% @user.animals.each do |animal| %>
-            <%= link_to animal_path(animal) do %>
-            <div class="message">
-              <% animal_url = cl_image_path animal.photo %>
-              <%= image_tag animal_url, class: "avatar" %>
-              <div class="message-body">
-                <p><strong><%= animal.title %></strong></p>
-                <h3><%= animal.description[0..120] %>...</h3>
-              </div>
-              <div class="message-status">
-                <% if animal.bookings.count == 1  %>
-                  <p class="price">1 booking</p>
-                  <% elsif animal.bookings.count > 1 %>
-                  <p class="price"><%= animal.bookings.count %> bookings</p>
-                  <% elsif animal.bookings.count == 0 %>
-                  <p class="price">no booking yet</p>
-                <% end  %>
-              </div>
-            </div>
-            <% end %>
-          <% end %>
-        </div>
-      </div>
-    </div>
-  </div>
-<% end %>
-
-
-<% if @animals.any? %>
-  <div class="container">
-    <div class="row">
-      <div class="col-xs-12">
-        <h2>Bookings</h2>
-        <div class="message-container">
-          <% @animals.each do |booking| %>
-
-              <%= link_to animal_path(booking.animal) do %>
+<div class="wrapper">
+  <% if @user.animals.any? %>
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12">
+          <h2>Your Animals</h2>
+          <div class="message-container">
+            <% @user.animals.each do |animal| %>
+              <%= link_to animal_path(animal) do %>
               <div class="message">
-                <% avatar_url = booking.user.facebook_picture_url || "http://placehold.it/30x30" %>
-                <%= image_tag avatar_url, class: "avatar" %>
-                <div class="message-name">
-                  <h2><%= booking.user.first_name %> <%= booking.user.last_name %></h2>
-                  <p><%= booking.created_at.to_date %></p>
-                </div>
+                <% animal_url = cl_image_path animal.photo %>
+                <%= image_tag animal_url, class: "avatar" %>
                 <div class="message-body">
-                  <p><strong><%= booking.animal.title %></strong></p>
-                  <h3><strong><%= (booking.end_date - booking.start_date).to_i %> days</strong>, from <%= booking.start_date %> to <%= booking.end_date %></h3>
+                  <p><strong><%= animal.title %></strong></p>
+                  <h3><%= animal.description[0..120] %>...</h3>
                 </div>
                 <div class="message-status">
-                  <p class="status pending"><%= booking.status %></p>
-                  <p class="price"><%= booking.price %>€</p>
+                  <% if animal.bookings.count == 1  %>
+                    <p class="price">1 booking</p>
+                    <% elsif animal.bookings.count > 1 %>
+                    <p class="price"><%= animal.bookings.count %> bookings</p>
+                    <% elsif animal.bookings.count == 0 %>
+                    <p class="price">no booking yet</p>
+                  <% end  %>
                 </div>
               </div>
               <% end %>
-
-          <% end %>
+            <% end %>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-<% end %>
+  <% end %>
+
+
+  <% if @animals.any? %>
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12">
+          <h2>Bookings</h2>
+          <div class="message-container">
+            <% @animals.each do |booking| %>
+
+                <%= link_to animal_path(booking.animal) do %>
+                <div class="message">
+                  <% avatar_url = booking.user.facebook_picture_url || "http://placehold.it/30x30" %>
+                  <%= image_tag avatar_url, class: "avatar" %>
+                  <div class="message-name">
+                    <h2><%= booking.user.first_name %> <%= booking.user.last_name %></h2>
+                    <p><%= booking.created_at.to_date %></p>
+                  </div>
+                  <div class="message-body">
+                    <p><strong><%= booking.animal.title %></strong></p>
+                    <h3><strong><%= (booking.end_date - booking.start_date).to_i %> days</strong>, from <%= booking.start_date %> to <%= booking.end_date %></h3>
+                  </div>
+                  <div class="message-status">
+                    <p class="status pending"><%= booking.status %></p>
+                    <p class="price"><%= booking.price %>€</p>
+                  </div>
+                </div>
+                <% end %>
+
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+
+</div>
