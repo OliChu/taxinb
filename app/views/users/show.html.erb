@@ -4,52 +4,55 @@
   <% if @user.bookings.any? { |booking| booking.start_date.to_time.to_i < Time.now.to_i } %>
     <div class="row">
       <div class="col-xs-12">
-        <h2>Bookings to review</h2>
         <% @user.bookings.each do |booking| %>
-          <% if booking.end_date.to_time.to_i < Time.now.to_i %>
-            <%= link_to animal_path(booking.animal) do %>
-              <div class="product">
-                <%= image_tag booking.animal.photo, class: "product-image hidden-xs"%>
-                <div class='product-body'>
-                  <h3><%= booking.animal.title %></h3>
-                  <h6><%= booking.user.first_name %> <%= booking.user.last_name %></h6>
-                  <p><%= booking.animal.address %></p>
-                <%= link_to 'review', new_animal_booking_review_path(booking.animal, booking), {class: "btn btn-primary"} %>
-                </div>
+          <% if booking.end_date.to_time.to_i < Time.now.to_i && booking.review.nil? %>
+            <div class="add-review">
+              <% avatar_url = Animal.where(id: booking.animal_id).first.user.facebook_picture_url || "http://placehold.it/30x30" %>
+              <%= image_tag avatar_url, class: "avatar" %>
+              <div class="add-review-owner-name">
+                <h2><%= Animal.where(id: booking.animal_id).first.user.first_name %> <%= Animal.where(id: booking.animal_id).first.user.last_name %></h2>
               </div>
-            <% end %>
+              <div class="add-review-body">
+                <p>How was your experience with <strong><%= booking.animal.title %></strong> ?</p>
+                <h3>You have booked <%= booking.animal.title %> from <%= booking.start_date %> to <%= booking.end_date %></h3>
+              </div>
+              <%= link_to 'Review', new_animal_booking_review_path(booking.animal, booking), {class: "btn btn-primary"} %>
+            </div>
           <% end %>
         <% end %>
       </div>
     </div>
   <% end %>
-
-
-<div class="container">
-   <div class="row">
+  <div class="row">
     <div class="col-xs-12">
-      <h2>Past reviews</h2>
       <% @user.bookings.each do |booking| %>
-         <% if booking.review  %>
-          <div class="message">
-             <% avatar_url = booking.user.facebook_picture_url || "http://placehold.it/30x30" %>
-             <%= image_tag avatar_url, class: "avatar large" %>
-            <div class="message-name">
-              <h3><%= booking.user.first_name %> <%= booking.user.last_name %></h3>
-              <p> </p>
+        <% if booking.review %>
+          <div class="add-review">
+            <% avatar_url = Animal.where(id: booking.animal_id).first.user.facebook_picture_url || "http://placehold.it/30x30" %>
+            <%= image_tag avatar_url, class: "avatar" %>
+            <div class="add-review-owner-name">
+              <h2><%= Animal.where(id: booking.animal_id).first.user.first_name %> <%= Animal.where(id: booking.animal_id).first.user.last_name %></h2>
             </div>
-            <div class="message-body">
-              <p><strong><%= booking.animal.title %></strong></p>
+            <div class="add-review-body">
               <p><%= booking.review.comment %></p>
+              <h3><%= booking.animal.title %> from <%= booking.start_date %> to <%= booking.end_date %></h3>
             </div>
-            <div class="message-status">
-              <p class="price"><%= booking.review.rating %>/5</p>
+            <div class="stars">
+              <ul class="list-inline">
+                <% booking.animal.rating[0].times do %>
+                  <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                <% end %>
+                <% if booking.animal.rating[1] != 0 %>
+                  <li><i class="fa fa-star-half-o" aria-hidden="true"></i></li>
+                <% end %>
+                <% booking.animal.rating[2].times do %>
+                  <li><i class="fa fa-star-o" aria-hidden="true"></i></li>
+                <% end %>
+              </ul>
+            </div>
             </div>
           </div>
         <% end %>
       <% end %>
     </div>
-  </div>
 </div>
-
-
