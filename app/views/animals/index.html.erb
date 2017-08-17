@@ -2,70 +2,70 @@
   <div class="container">
     <div class="row">
       <div class="col-md-8 col-xs-4 row-titles">
-        <h2>Animal List</h2>
+        <h2>Our traditional skin-mounts</h2>
       </div>
     </div>
     <div class="row">
       <div class="col-xs-6 col-sm-8">
-         <div class="row">
-          <% @animals.each do |animal| %>
-            <%= link_to animal_path(animal) do %>
-              <div class="col-xs-8 col-sm-6 col-md-4   ">
-                <div class="card-container">
-                  <div class="card " style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= cl_image_path animal.photo, crop: :fill %>')">
-                    <div class="card-name"><%= animal.title %></div>
-                  </div>
-                  <div class="card-info">
-                    <p id="price"><%= animal.daily_price %>€ / day</p>
-                    <div class="stars">
-                      <p id="rating">Rating:</p>
-                      <% if animal.rating == 0 %>
-                        <p id="no-review">Not rated yet</p>
-                      <% else %>
-                        <ul class="list-inline">
-                          <% animal.rating[0].times do %>
-                            <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                          <% end %>
-                          <% if animal.rating[1] != 0 %>
-                            <li><i class="fa fa-star-half-o" aria-hidden="true"></i></li>
-                          <% end %>
-                          <% animal.rating[2].times do %>
-                            <li><i class="fa fa-star-o" aria-hidden="true"></i></li>
-                          <% end %>
-                        </ul>
-                      <% end %>
-                    </div>
-                  </div>
-                </div>
+       <div class="row">
+        <% @animals.each do |animal| %>
+        <%= link_to animal_path(animal) do %>
+        <div class="col-xs-8 col-sm-6 col-md-4   ">
+          <div class="card-container">
+            <div class="card " style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= cl_image_path animal.photo, crop: :fill %>')">
+              <div class="card-name"><%= animal.title %></div>
+            </div>
+            <div class="card-info">
+              <p id="price"><%= animal.daily_price %>€ / day</p>
+              <div class="stars">
+                <p id="rating">Rating:</p>
+                <% if animal.rating == 0 %>
+                <p id="no-review">Not rated yet</p>
+                <% else %>
+                <ul class="list-inline">
+                  <% animal.rating[0].times do %>
+                  <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                  <% end %>
+                  <% if animal.rating[1] != 0 %>
+                  <li><i class="fa fa-star-half-o" aria-hidden="true"></i></li>
+                  <% end %>
+                  <% animal.rating[2].times do %>
+                  <li><i class="fa fa-star-o" aria-hidden="true"></i></li>
+                  <% end %>
+                </ul>
+                <% end %>
               </div>
-            <% end %>
-          <% end %>
+            </div>
           </div>
-      </div>
-      <div class="col-xs-6 col-sm-4 ">
-        <div class="map-container">
-          <div id="map"></div>
         </div>
+        <% end %>
+        <% end %>
+      </div>
+    </div>
+    <div class="col-xs-6 col-sm-4 sticky">
+      <div class="map-container">
+        <div id="map"></div>
       </div>
     </div>
   </div>
 </div>
+</div>
 
 <% content_for(:after_js) do %>
-  <script>
-    $(document).ready(function() {
-      var handler = Gmaps.build('Google');
-      handler.buildMap({ internal: { id: 'map' } }, function() {
-        markers = handler.addMarkers(<%= raw @hash.to_json %>);
-        handler.bounds.extendWith(markers);
-        handler.fitMapToBounds();
-        if (markers.length == 0) {
-          handler.getMap().setZoom(2);
-        } else if (markers.length == 1) {
-          handler.getMap().setZoom(14);
-        }
-      });
+<script>
+  $(document).ready(function() {
+    var handler = Gmaps.build('Google');
+    handler.buildMap({ internal: { id: 'map' } }, function() {
+      markers = handler.addMarkers(<%= raw @hash.to_json %>);
+      handler.bounds.extendWith(markers);
+      handler.fitMapToBounds();
+      if (markers.length == 0) {
+        handler.getMap().setZoom(2);
+      } else if (markers.length == 1) {
+        handler.getMap().setZoom(14);
+      }
     });
-  </script>
+  });
+</script>
 <% end %>
 
