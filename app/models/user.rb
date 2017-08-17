@@ -27,4 +27,14 @@ class User < ApplicationRecord
 
     return user
   end
+
+
+  def nb_reviews
+    @bookings = bookings
+    count = 0
+    @bookings.each do |booking|
+      count += 1 unless booking.review.nil?
+    end
+    return count
+  end
 end
