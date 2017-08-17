@@ -13,14 +13,17 @@
   margin: 0;
   // margin-bottom: 20px;
   border-radius: 5px;
+  border: 20px solid #FFCD05;
 }
 .card-name {
   position: absolute;
-  top: 10px;
+  bottom: 0;
   left: 10px;
-  font-size: 25px;
+  font-size: 15;
   text-transform: uppercase;
+  font-weight: bold;
 }
+
 .card-link {
    background: black;
    opacity: 1;
@@ -32,7 +35,7 @@
 .card-info {
   #rating {
     margin: 0;
-    color: $green;
+    color: black;
   }
   li {
     padding: 0;
@@ -47,7 +50,7 @@
   display: flex;
   justify-content: left;
   li {
-    color: #C62727;
+    color: $natgeo;
   }
 }
 
@@ -60,6 +63,9 @@
   text-align: center;
   margin: 0;
   color: black;
+  text-decoration: underline $natgeo;
 }
+
+
 
 
