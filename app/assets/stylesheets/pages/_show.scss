@@ -1,17 +1,23 @@
-.fullsize {
-  height: 100vh;
-}
-
-.general_content {
-
+.user-info {
   h3 {
     margin: 0;
   }
+  p {
+    padding: 0;
+    padding-top: 10px;
+  }
+
 }
 
-.box-design {
+.user-section {
+  padding-top: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.bottom-border {
    border-bottom: 1px solid #DBDBDB;
-   padding-bottom: 30px;
+   padding-bottom: 20px;
 }
 
 .title-container {
@@ -26,7 +32,7 @@
   font-size: 30px;
   align-text: right;
   a {
-    color: $green;
+    color: black;
     text-decoration: none;
   }
 }
@@ -40,3 +46,16 @@
 #avatar {
   padding-top: 10px;
 }
+
+.image-container {
+  width: 100%;
+  padding-top: 20px;
+  position: sticky;
+  top: 0;
+}
+
+.row-content {
+  display: flex;
+}
+
+
