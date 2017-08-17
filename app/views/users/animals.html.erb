@@ -1,5 +1,28 @@
 <%= render 'shared/profile_header' %>
 
+ <% if @user.animals.any? %>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <h2>Your Animals</h2>
+      <% @user.animals.each do |animal| %>
+        <%= link_to animal_path(animal) do %>
+        <div class="message">
+          <% animal_url = cl_image_path animal.photo %>
+          <%= image_tag animal_url, class: "avatar" %>
+          <div class="message-body">
+            <p><strong><%= animal.title %></strong></p>
+            <h3><%= animal.description %></h3>
+          </div>
+        </div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>
+<% end %>
+
+
 <div class="container">
   <div class="row">
     <div class="col-xs-12">

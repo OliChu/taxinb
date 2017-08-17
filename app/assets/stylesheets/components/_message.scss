@@ -1,0 +1,69 @@
+.message {
+  background: white;
+  padding: 20px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid rgba(220,224,244,0.4);
+  text-decoration: none;
+}
+.message:last-child {
+  border-bottom: none;
+}
+
+.message .avatar {
+  margin: 0px;
+}
+
+.message-body {
+  flex-grow: 1;
+  padding-left: 20px;
+  color: rgba(0,0,0,0.7);
+}
+
+.message-body p {
+  margin-bottom: 5px;
+}
+
+.message-body h3 {
+  color: rgba(0, 0, 0, 0.4);
+  font-size: 13px;
+  font-weight: lighter;
+  margin: 0px;
+  opacity: 0.6;
+}
+.message-body strong {
+  color: rgba(0,0,0,0.9);
+  color: rgba(0,0,0,0.9);
+}
+
+.message-name {
+  padding-left: 10px;
+  min-width: 150px;
+}
+.message-name h2 {
+  font-size: 13px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+.message-name p {
+  font-size: 13px;
+  font-weight: lighter;
+  opacity: 0.6;
+}
+
+.message-status {
+  font-size: 14px;
+  font-weight: bold;
+}
+.status.accepted {
+  color: #04A366;
+}
+.status.declined {
+  color: red;
+}
+.status.pending {
+  color: lightgrey;
+}
+

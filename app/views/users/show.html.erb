@@ -6,13 +6,13 @@
       <div class="col-xs-12">
         <% @user.bookings.each do |booking| %>
           <% if booking.end_date.to_time.to_i < Time.now.to_i && booking.review.nil? %>
-            <div class="add-review">
-              <% avatar_url = Animal.where(id: booking.animal_id).first.user.facebook_picture_url || "http://placehold.it/30x30" %>
+            <div class="message">
+              <% avatar_url = booking.animal.user.facebook_picture_url || "http://placehold.it/30x30" %>
               <%= image_tag avatar_url, class: "avatar" %>
-              <div class="add-review-owner-name">
-                <h2><%= Animal.where(id: booking.animal_id).first.user.first_name %> <%= Animal.where(id: booking.animal_id).first.user.last_name %></h2>
+              <div class="message-name">
+                <h2><%= booking.animal.user.first_name %> <%= booking.animal.user.last_name %></h2>
               </div>
-              <div class="add-review-body">
+              <div class="message-body">
                 <p>How was your experience with <strong><%= booking.animal.title %></strong> ?</p>
                 <h3>You have booked <%= booking.animal.title %> from <%= booking.start_date %> to <%= booking.end_date %></h3>
               </div>
@@ -27,13 +27,13 @@
     <div class="col-xs-12">
       <% @user.bookings.each do |booking| %>
         <% if booking.review %>
-          <div class="add-review">
-            <% avatar_url = Animal.where(id: booking.animal_id).first.user.facebook_picture_url || "http://placehold.it/30x30" %>
+          <div class="message">
+            <% avatar_url = booking.animal.user.facebook_picture_url || "http://placehold.it/30x30" %>
             <%= image_tag avatar_url, class: "avatar" %>
-            <div class="add-review-owner-name">
-              <h2><%= Animal.where(id: booking.animal_id).first.user.first_name %> <%= Animal.where(id: booking.animal_id).first.user.last_name %></h2>
+            <div class="message-name">
+              <h2><%= booking.animal.user.first_name %> <%= booking.animal.user.last_name %></h2>
             </div>
-            <div class="add-review-body">
+            <div class="message-body">
               <p><%= booking.review.comment %></p>
               <h3><%= booking.animal.title %> from <%= booking.start_date %> to <%= booking.end_date %></h3>
             </div>
