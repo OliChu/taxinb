@@ -22,5 +22,9 @@ class Animal < ApplicationRecord
     end
   end
 
+  def self.search(search)
+    where("title ILIKE ? OR description ILIKE ?", "%#{search}%", "%#{search}%")
+  end
+
 end
 
