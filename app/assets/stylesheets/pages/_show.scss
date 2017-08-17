@@ -1,13 +1,85 @@
-.fullsize {
-  height: 100vh;
+.user-info {
+  h3 {
+    margin: 0;
+  }
+  p {
+    padding: 0;
+    padding-top: 10px;
+  }
 }
 
-.general_content {
+.user-section {
+  padding-top: 20px;
   display: flex;
   justify-content: space-between;
-  border-bottom: 1px solid #DBDBDB
+  align-items: center;
+  h3 {
+    margin: 0;
+  }
 }
 
-.box-design {
-   border-bottom: 1px solid #DBDBDB
+.user-info {
+  display: flex;
+  justify-content: space-between;
+  p {
+    color: black;
+    padding: 0px 20px;
+    margin: 0;
+    :hover {
+      text-decoration: $natgeo;
+    }
+  }
 }
+
+.bottom-border {
+   border-bottom: 1px solid #DBDBDB;
+   padding-bottom: 20px;
+}
+
+.title-container {
+  display: flex;
+  align-items: center;
+  h1 {
+    margin: 0;
+  }
+}
+
+.animal-actions {
+  font-size: 30px;
+  align-text: right;
+  a {
+    color: black;
+    text-decoration: none;
+  }
+}
+
+.booking-form {
+  margin-top: 20px;
+  border-bottom: 1px solid #DBDBDB;
+  padding-bottom: 20px;
+}
+
+#avatar {
+  padding-top: 10px;
+  border-radius: 50%;
+}
+
+.image-container {
+  img {
+    width: 100%;
+  }
+  padding-top: 20px;
+  position: sticky;
+  top: 0;
+}
+
+.row-content {
+  display: flex;
+}
+
+.fa {
+  color: $natgeo;
+}
+
+
+

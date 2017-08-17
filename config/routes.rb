@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
 
 
-  root to: 'animals#index'
+  root to: 'pages#home'
 
   resources :animals do
     resources :bookings do

@@ -1,83 +1,125 @@
- <div class="wrapper">
-  <div class="container fullsize">
-      <div class="col-xs-12 col-sm-6 col-sm-offset-1">
-          <div id="animal_title" class="box-design">
-            <h1><%= @animal.title %></h1>
-              <div id="animal_description">
+<div class="wrapper">
+  <div class="container">
+    <div class="row">
+      <div class="row-content">
+        <div class="col-xs-7">
+          <div class="bottom-border">
+            <div class="row">
+              <div class="col-xs-10">
+                <div class="title">
+                  <h1><%= @animal.title %></h1>
+                </div>
+                <div class="stars">
+                    <p id="rating">Rating:</p>
+                    <% if @animal.rating == 0 %>
+                      <p id="no-review">Not rated yet</p>
+                    <% else %>
+                      <ul class="list-inline">
+                        <% @animal.rating[0].times do %>
+                          <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                        <% end %>
+                        <% if @animal.rating[1] != 0 %>
+                          <li><i class="fa fa-star-half-o" aria-hidden="true"></i></li>
+                        <% end %>
+                        <% @animal.rating[2].times do %>
+                          <li><i class="fa fa-star-o" aria-hidden="true"></i></li>
+                        <% end %>
+                      </ul>
+                    <% end %>
+                </div>
                 <p> <%= @animal.description %> </p>
-             </div>
-          </div>
-
-          <div class="row">
-            <div class="general_content" class="box-design">
-              <div id='owner-profile'>
-                <h3>Animal proposée par</h3>
-                <p> <%= @animal.user %> </p>
               </div>
-              <div id="owner-profile-picture avatar ">
-                 <%= image_tag @animal.photo, height: 60, width: 60, style:"border-radius: 50px;" %>
+              <div class="col-xs-2">
+                <div class="animal-actions text-right">
+                  <% unless current_user != @animal.user %>
+                    <%= link_to edit_animal_path(@animal) do %>
+                      <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                    <% end %>
+                    <%= link_to animal_path(@animal), method: :delete do %>
+                      <i class="fa fa-trash" aria-hidden="true"></i>
+                    <% end %>
+                  <% end %>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
 
-        <div class="ligne">
-          <h3>Disponibilités à venir</h3>
-        </div>
-        <div class="ligne">
-          <%= link_to 'Back', animals_path %>
-          <%= link_to 'Edit', edit_animal_path(@animal) %>
-          <%= link_to 'Delete', animal_path(@animal), method: :delete %>
-        </div>
-      </div>
+          <div class="bottom-border user-section">
+              <h3>Property of</h3>
+              <div class="user-info">
+                <%= link_to profile_path(@animal.user) do %>
+                  <p><strong><%= @animal.user.first_name %> <%= @animal.user.last_name %></strong></p>
+                <% end %>
+                  <p><%= @animal.user.nb_reviews %> Reviews</p>
+                <%= link_to profile_animals_path(@animal.user) do %>
+                  <p><%= @animal.user.animals.count %> Animals to rent</p>
+                <% end %>
 
-      <div class="col-xs-4">
-        <div class="map-container">
-          <div class="profile_picture ">
-          <%= cl_image_tag @animal.photo, height: 400, width: 400, crop: :fill, style:" box-shadow: 0 1px 2px rgba(0,0,0,0.2);
-          border: white 1px solid;" %>
+              </div>
+            <div id="avatar">
+              <% avatar_url = @animal.user.facebook_picture_url || "http://placehold.it/30x30" %>
+              <%= image_tag avatar_url %>
+            </div>
           </div>
-           <div class="price.bouton">
-             <p><%= @animal.daily_price %> €</p>
+
+          <div class="booking-form form-inline">
+            <% if current_user == @animal.user %>
+              <p>You can't book your own animal.</p>
+            <% else %>
+              <%= simple_form_for [@animal, @booking] do |f| %>
+                <%= f.text_field :start_date, placeholder: "Start date", class: 'datepicker form-control'%>
+                <%= f.text_field :end_date, placeholder: "End date", class: 'datepicker form-control'%>
+                <%= f.button :submit, class: "btn-death" %>
+              <% end %>
+            <% end %>
           </div>
-        </div>
-         <div class="row">
-            <form action="" id="flat-form">
-              <h2>Book this animal</h2>
-                <div class="form-group">
-                  <div class="row">
-                    <div class="col-xs-6">
-                      <input type="text" placeholder="first_day" class="form-control">
+
+          <div class="bottom-border reviews-section">
+            <h3>Reviews</h3>
+            <% if @animal.bookings == [] %>
+              <p>No review yet</p>
+            <% else %>
+              <% @animal.bookings.each do |booking| %>
+                <% if booking.review %>
+                  <div class="message">
+                     <% avatar_url = booking.user.facebook_picture_url || "http://placehold.it/30x30" %>
+                     <%= image_tag avatar_url, class: "avatar large" %>
+                    <div class="message-name">
+                      <h3><%= booking.user.first_name %> <%= booking.user.last_name %></h3>
+                      <p> </p>
                     </div>
-                    <div class="col-xs-6">
-                      <input type="text" placeholder="last_day"   class="form-control">
+                    <div class="message-body">
+                      <p><%= booking.review.comment %></p>
+                    </div>
+                    <div class="message-status">
+                      <p class="price">
+                        <ul class="list-inline">
+                          <% booking.review.rating.times do %>
+                            <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                          <% end %>
+                          <% (5 - booking.review.rating).times do %>
+                            <li><i class="fa fa-star-o" aria-hidden="true"></i></li>
+                          <% end %>
+                        </ul>
+                      </p>
                     </div>
                   </div>
-                </div>
-                <div class="form-group">
-                  <div class="row">
-                    <div class="col-xs-12">
-                      <select name="" id="" class="form-control">
-                      <option value="1">1 day</option>
-                      <option value="2">2 days</option>
-                      <option value="3">3 days</option>
-                      </select>
-                    </div>
-                </div>
-              </div>
-              <div class="form-group">
-                <div class="row">
-                  <div class="col-xs-12">
-                    <%= link_to 'Book', new_animal_booking_path(@animal) %>
-                  </div>
-                </div>
-              </div>
-            </form>
+                <% end %>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+        <div class="col-xs-5">
+          <div class="image-container">
+            <%= cl_image_tag @animal.photo, crop: :fill %>
           </div>
         </div>
       </div>
+    </div>
+    <div id="map"></div>
+  </div>
+</div>
 
-
-<div id="map"></div>
 <% content_for(:after_js) do %>
   <script>
     $(document).ready(function() {

@@ -12,6 +12,7 @@ class AnimalsController < ApplicationController
   end
 
   def show
+    @booking = Booking.new
     # @animal_coordinates = { lat: @animal.latitude, lng: @animal.longitude }
     @hash = Gmaps4rails.build_markers([@animal]) do |animal, marker|
       marker.lat animal.latitude
