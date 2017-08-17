@@ -9,5 +9,6 @@ class UsersController < ApplicationController
 
   def animals
     @user = current_user
+    @animals = Booking.where(animal_id: @user.animals)
   end
 end

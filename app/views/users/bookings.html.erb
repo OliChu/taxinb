@@ -4,25 +4,28 @@
 <div class="container">
   <div class="row">
     <div class="col-xs-12">
-      <% @user.bookings.each do |booking| %>
-        <%= link_to animal_path(booking.animal) do %>
-        <div class="message">
-          <% avatar_url = booking.animal.user.facebook_picture_url || "http://placehold.it/30x30" %>
-          <%= image_tag avatar_url, class: "avatar" %>
-          <div class="message-name">
-            <h2><%= booking.animal.user.first_name %> <%= booking.animal.user.last_name %></h2>
+      <div class="message-container">
+        <% @user.bookings.each do |booking| %>
+          <%= link_to animal_path(booking.animal) do %>
+          <div class="message">
+            <% avatar_url = booking.animal.user.facebook_picture_url || "http://placehold.it/30x30" %>
+            <%= image_tag avatar_url, class: "avatar" %>
+            <div class="message-name">
+              <h2><%= booking.animal.user.first_name %> <%= booking.animal.user.last_name %></h2>
+              <p><%= booking.created_at.to_date %></p>
+            </div>
+            <div class="message-body">
+              <p><strong><%= booking.animal.title %></strong></p>
+              <h3><strong><%= (booking.end_date - booking.start_date).to_i %> days</strong>, from <%= booking.start_date %> to <%= booking.end_date %></h3>
+            </div>
+            <div class="message-status">
+              <p class="status pending"><%= booking.status %></p>
+              <p class="price"><%= booking.price %>€</p>
+            </div>
           </div>
-          <div class="message-body">
-            <p><strong><%= booking.animal.title %></strong></p>
-            <h3><strong><%= (booking.end_date - booking.start_date).to_i %> days</strong>, from <%= booking.start_date %> to <%= booking.end_date %></h3>
-          </div>
-          <div class="message-status">
-            <p class="status pending"><%= booking.status %></p>
-            <p class="price"><%= booking.price %>€</p>
-          </div>
-        </div>
+          <% end %>
         <% end %>
-      <% end %>
+      </div>
     </div>
   </div>
 </div>

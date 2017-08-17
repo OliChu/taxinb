@@ -1,3 +1,6 @@
+.message-container a {
+  text-decoration: none;
+}
 .message {
   background: white;
   padding: 20px;
@@ -51,6 +54,8 @@
   font-size: 13px;
   font-weight: lighter;
   opacity: 0.6;
+  margin-top: 5px;
+  margin-bottom: 0px;
 }
 
 .message-status {

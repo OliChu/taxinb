@@ -37,7 +37,6 @@ class BookingsController < ApplicationController
     @booking = Booking.find(params[:id])
     @booking.update(booking_params)
     @booking.price = (@booking.end_date - @booking.end_date) * @animal.daily_price
-    @booking.status = "Pending"
     @animal = @booking.animal
     redirect_to animal_path(@animal)
   end
@@ -51,6 +50,6 @@ class BookingsController < ApplicationController
   private
 
   def booking_params
-    params.require(:booking).permit(:start_date, :end_date)
+    params.require(:booking).permit(:start_date, :end_date, :status)
   end
 end
