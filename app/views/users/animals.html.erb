@@ -1,119 +1,72 @@
 <%= render 'shared/profile_header' %>
 
-<div class="container">
-  <div class="row">
-    <div class="col-xs-12">
-      <h2>My Animals</h2>
-    </div>
-    <% @user.animals.each do |animal| %>
-      <%= link_to animal_path(animal) do %>
-        <div class="col-xs-12 col-sm-4">
-          <div class="card " style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= cl_image_path animal.photo, crop: :fill %>')">
-            <div class="card-name"><%= animal.title %></div>
-          </div>
-        </div>
-      <% end %>
-    <% end %>
-  </div>
-
-
-  <% if Booking.where(animal_id: @user.animals).any? { |booking| booking.start_date.to_time.to_i > Time.now.to_i } %>
-        <div class="row">
-          <div class="col-xs-12">
-            <h2>Future bookings</h2>
+<div class="wrapper">
+  <% if @user.animals.any? %>
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12">
+          <h2>Your Animals</h2>
+          <div class="message-container">
             <% @user.animals.each do |animal| %>
-              <% animal.bookings.each do |booking| %>
-                <% if booking.start_date.to_time.to_i > Time.now.to_i  %>
-                  <div class="message">
-                     <% avatar_url = booking.user.facebook_picture_url || "http://placehold.it/30x30" %>
-                     <%= image_tag avatar_url, class: "avatar large" %>
-                    <div class="message-name">
-                      <h3><%= booking.user.first_name %> <%= booking.user.last_name %></h3>
-                      <p> </p>
-                    </div>
-                    <div class="message-body">
-                      <p>Booking request for <strong><%= booking.animal.title %></strong></p>
-                      <p>
-                        from <%= booking.start_date %> to <%= booking.end_date %>
-                      </p>
-                    </div>
-                    <div class="message-status">
-                      <p class="status pending"><%= booking.status %></p>
-                      <p class="price"><%= booking.price %>€</p>
-                    </div>
-                  </div>
-                <% end %>
-              <% end  %>
-            <% end %>
-          </div>
-        </div>
-    <% end %>
-
-
-  <% if Booking.where(animal_id: @user.animals).any? { |booking| booking.start_date.to_time.to_i <= Time.now.to_i && booking.end_date.to_time.to_i > Time.now.to_i } %>
-    <div class="row">
-      <div class="col-xs-12">
-        <h2>Current bookings</h2>
-        <% @user.animals.each do |animal| %>
-          <% animal.bookings.each do |booking| %>
-            <% if booking.start_date.to_time.to_i <= Time.now.to_i && booking.end_date.to_time.to_i > Time.now.to_i  %>
+              <%= link_to animal_path(animal) do %>
               <div class="message">
-                 <% avatar_url = booking.user.facebook_picture_url || "http://placehold.it/30x30" %>
-                 <%= image_tag avatar_url, class: "avatar large" %>
-                <div class="message-name">
-                  <h3><%= booking.user.first_name %> <%= booking.user.last_name %></h3>
-                  <p> </p>
-                </div>
+                <% animal_url = cl_image_path animal.photo %>
+                <%= image_tag animal_url, class: "avatar" %>
                 <div class="message-body">
-                  <p>Booking request for <strong><%= booking.animal.title %></strong></p>
-                  <p>
-                    from <%= booking.start_date %> to <%= booking.end_date %>
-                  </p>
+                  <p><strong><%= animal.title %></strong></p>
+                  <h3><%= animal.description[0..120] %>...</h3>
                 </div>
                 <div class="message-status">
-                  <p class="status pending"><%= booking.status %></p>
-                  <p class="price"><%= booking.price %>€</p>
+                  <% if animal.bookings.count == 1  %>
+                    <p class="price">1 booking</p>
+                    <% elsif animal.bookings.count > 1 %>
+                    <p class="price"><%= animal.bookings.count %> bookings</p>
+                    <% elsif animal.bookings.count == 0 %>
+                    <p class="price">no booking yet</p>
+                  <% end  %>
                 </div>
               </div>
+              <% end %>
             <% end %>
-          <% end %>
-        <% end %>
+          </div>
+        </div>
       </div>
     </div>
   <% end %>
 
-  <% if Booking.where(animal_id: @user.animals).any? { |booking| booking.end_date.to_time.to_i < Time.now.to_i } %>
-    <div class="row">
-      <div class="col-xs-12">
-        <h2>Past bookings</h2>
-        <% @user.animals.each do |animal| %>
-          <% animal.bookings.each do |booking| %>
-            <% if booking.end_date.to_time.to_i < Time.now.to_i %>
-              <div class="message">
-                 <% avatar_url = booking.user.facebook_picture_url || "http://placehold.it/30x30" %>
-                 <%= image_tag avatar_url, class: "avatar large" %>
-                <div class="message-name">
-                  <h3><%= booking.user.first_name %> <%= booking.user.last_name %></h3>
-                  <p> </p>
+
+  <% if @animals.any? %>
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12">
+          <h2>Bookings</h2>
+          <div class="message-container">
+            <% @animals.each do |booking| %>
+
+                <%= link_to animal_path(booking.animal) do %>
+                <div class="message">
+                  <% avatar_url = booking.user.facebook_picture_url || "http://placehold.it/30x30" %>
+                  <%= image_tag avatar_url, class: "avatar" %>
+                  <div class="message-name">
+                    <h2><%= booking.user.first_name %> <%= booking.user.last_name %></h2>
+                    <p><%= booking.created_at.to_date %></p>
+                  </div>
+                  <div class="message-body">
+                    <p><strong><%= booking.animal.title %></strong></p>
+                    <h3><strong><%= (booking.end_date - booking.start_date).to_i %> days</strong>, from <%= booking.start_date %> to <%= booking.end_date %></h3>
+                  </div>
+                  <div class="message-status">
+                    <p class="status pending"><%= booking.status %></p>
+                    <p class="price"><%= booking.price %>€</p>
+                  </div>
                 </div>
-                <div class="message-body">
-                  <p>Booking request for <strong><%= booking.animal.title %></strong></p>
-                  <p>
-                    from <%= booking.start_date %> to <%= booking.end_date %>
-                  </p>
-                </div>
-                <div class="message-status">
-                  <p class="status pending"><%= booking.status %></p>
-                  <p class="price"><%= booking.price %>€</p>
-                </div>
-              </div>
+                <% end %>
+
             <% end %>
-          <% end %>
-        <% end %>
+          </div>
+        </div>
       </div>
     </div>
   <% end %>
 
 </div>
-
-
