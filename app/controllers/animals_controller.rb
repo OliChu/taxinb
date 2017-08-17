@@ -3,13 +3,31 @@ class AnimalsController < ApplicationController
   before_action :set_animal, only: [:show, :edit, :update, :destroy, :rating]
 
   def index
-    @animals = Animal.where.not(latitude: nil, longitude: nil)
-    @hash = Gmaps4rails.build_markers(@animals) do |animal, marker|
-      marker.lat animal.latitude
-      marker.lng animal.longitude
+    # @animals = Animal.where.not(latitude: nil, longitude: nil)
+
+    if params[:search]
+      @animals = Animal.search(params[:search]).order("created_at DESC")
+      @hash = Gmaps4rails.build_markers(@animals) do |animal, marker|
+        marker.lat animal.latitude
+        marker.lng animal.longitude
+      end
+    else
+      @animals = Animal.all.order("created_at DESC")
+      @hash = Gmaps4rails.build_markers(@animals) do |animal, marker|
+        marker.lat animal.latitude
+        marker.lng animal.longitude
+      end
     end
-      # marker.infowindow render_to_string(partial: "/animals/map_box", locals: { animal: animal })
   end
+
+  # def index
+  #   @animals = Animal.where.not(latitude: nil, longitude: nil)
+  #   @hash = Gmaps4rails.build_markers(@animals) do |animal, marker|
+  #     marker.lat animal.latitude
+  #     marker.lng animal.longitude
+  #   end
+  #     # marker.infowindow render_to_string(partial: "/animals/map_box", locals: { animal: animal })
+  # end
 
   def show
     @booking = Booking.new
