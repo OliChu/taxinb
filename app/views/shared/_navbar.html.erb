@@ -20,7 +20,7 @@
     <% if user_signed_in? %>
 
       <!-- Links when logged in -->
-      <%= link_to "Rent your animal", new_animal_path, class: "navbar-wagon-item navbar-wagon-link" %>
+      <%= link_to "Add a new animal", new_animal_path, class: "navbar-wagon-item navbar-wagon-link" %>
       <%= link_to "Profile", profile_path, class: "navbar-wagon-item navbar-wagon-link" %>
 
       <!-- Avatar with dropdown menu -->
@@ -50,13 +50,18 @@
       <i class="fa fa-bars dropdown-toggle" data-toggle="dropdown"></i>
       <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
         <li>
-          <%= link_to profile_path do %>
-            <i class="fa fa-user"></i> <%= t(".profile", default: "Profile") %>
+          <%= link_to animals_path do %>
+            <i class="fa fa-user"></i> <%= t(".home", default: "Home") %>
           <% end %>
         </li>
         <li>
-          <%= link_to animals_path do %>
-            <i class="fa fa-home"></i>  <%= t(".profile", default: "Home") %>
+          <%= link_to new_animal_path do %>
+            <i class="fa fa-plus"></i>  <%= t(".new_animal", default: "New Animal") %>
+          <% end %>
+        </li>
+        <li>
+          <%= link_to profile_path do %>
+            <i class="fa fa-home"></i>  <%= t(".profile", default: "Profil") %>
           <% end %>
         </li>
         <li>
