@@ -15,7 +15,7 @@
                     <% if @animal.rating == 0 %>
                       <p id="no-review">Not rated yet</p>
                     <% else %>
-                      <ul class="list-inline">
+                      <ul class="list-inline review-stars">
                         <% @animal.rating[0].times do %>
                           <li><i class="fa fa-star" aria-hidden="true"></i></li>
                         <% end %>
@@ -33,8 +33,8 @@
                   <h3>Property of:</h3>
                   <div class="user-info">
                     <p><strong><%= @animal.user.first_name %> <%= @animal.user.last_name %></strong></p>
-                    <p><%= @animal.user.nb_reviews %> Reviews</p>
-                    <p><%= @animal.user.animals.count %> Animals to rent</p>
+<!--                     <p><%= @animal.user.nb_reviews %> Reviews</p>
+ -->                    <p><%= @animal.user.animals.count %> Animals to rent</p>
                   </div>
                 <div id="avatar">
                   <% avatar_url = @animal.user.facebook_picture_url || "http://placehold.it/30x30" %>
