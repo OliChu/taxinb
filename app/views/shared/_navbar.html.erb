@@ -1,8 +1,18 @@
 <div class="navbar-wagon">
   <!-- Logo -->
-  <%= link_to root_path, class: "navbar-wagon-brand" do %>
+  <%= link_to animals_path, class: "navbar-wagon-brand" do %>
     <%= image_tag "logo_white.png" %>
   <% end %>
+
+  <!-- Searchbar -->
+
+  <div class="searchbar form-inline ">
+    <%= form_tag(animals_path, :method => "get", id: "search-form") do %>
+    <%= text_field_tag :search_animal, params[:search_animal], placeholder: "Search by animal", class: 'form-control' %>
+    <%= text_field_tag :search_address, params[:search_address], placeholder: "Search by address", class: 'form-control' %>
+    <%= submit_tag "Search", :name => nil, class: 'btn btn-death' %>
+    <% end %>
+  </div>
 
   <!-- Right Navigation -->
   <div class="navbar-wagon-right hidden-xs hidden-sm">
@@ -12,13 +22,13 @@
       <!-- Links when logged in -->
       <%= link_to "Home", animals_path, class: "navbar-wagon-item navbar-wagon-link" %>
       <%= link_to "Profile", profile_path, class: "navbar-wagon-item navbar-wagon-link" %>
-      <%= link_to "Rent stuffed animals", new_animal_path, class: "navbar-wagon-item navbar-wagon-link" %>
+      <%= link_to "Rent your animal", new_animal_path, class: "navbar-wagon-item navbar-wagon-link" %>
 
       <!-- Avatar with dropdown menu -->
       <div class="navbar-wagon-item">
         <div class="dropdown">
           <!-- Display Facebook avatar if available -->
-          <% avatar_url = current_user.facebook_picture_url || "http://placehold.it/30x30" %>
+          <% avatar_url = current_user.facebook_picture_url || "logo_white.png" %>
           <%= image_tag avatar_url, class: "avatar dropdown-toggle", id: "navbar-wagon-menu", "data-toggle" => "dropdown" %>
           <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
             <li>

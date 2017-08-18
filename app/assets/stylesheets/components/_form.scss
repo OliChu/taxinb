@@ -7,10 +7,13 @@
 }
 
 .btn-death {
-  background-color: black;
-  color: white;
-  :hover {
+  background-color: $natgeo;
+  color: black;
+  &:hover {
     opacity: 0.7;
-    color: black;
   }
+}
+
+.form-wrapper {
+  height: calc(100vh - 200px);
 }

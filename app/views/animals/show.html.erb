@@ -2,12 +2,20 @@
   <div class="container">
     <div class="row">
       <div class="row-content">
-        <div class="col-xs-6">
+        <div class="col-xs-7">
           <div class="bottom-border">
             <div class="row">
               <div class="col-xs-10">
                 <div class="title">
                   <h1><%= @animal.title %></h1>
+                  <% unless current_user != @animal.user %>
+                    <%= link_to edit_animal_path(@animal) do %>
+                      <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                    <% end %>
+                    <%= link_to animal_path(@animal), method: :delete do %>
+                      <i class="fa fa-trash" aria-hidden="true"></i>
+                    <% end %>
+                  <% end %>
                 </div>
                 <div class="stars">
                     <p id="rating">Rating:</p>
@@ -30,39 +38,38 @@
                 <p> <%= @animal.description %> </p>
               </div>
               <div class="col-xs-2">
-                <div class="animal-actions text-right">
-                  <% if current_user = @animal.user %>
-                    <%= link_to edit_animal_path(@animal) do %>
-                      <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                    <% end %>
-                    <%= link_to animal_path(@animal), method: :delete do %>
-                      <i class="fa fa-trash" aria-hidden="true"></i>
-                    <% end %>
-                  <% end %>
-                </div>
+
               </div>
             </div>
           </div>
 
           <div class="bottom-border user-section">
-            <div class="user-info">
               <h3>Property of</h3>
-              <%= link_to profile_path(@animal.user) do %>
-                <p> <%= @animal.user.first_name %> <%= @animal.user.last_name %> - <%= @animal.user.nb_reviews %> reviews</p>
-              <% end %>
+              <div class="user-info">
+                <%= link_to profile_path(@animal.user), id: "price" do %>
+                  <p><strong><%= @animal.user.first_name %> <%= @animal.user.last_name %></strong></p>
+                <% end %>
+                  <p><%= @animal.user.nb_reviews %> Reviews</p>
+                <%= link_to profile_animals_path(@animal.user) ,id: "price" do %>
+                  <p><%= @animal.user.animals.count %> Animals to rent</p>
+                <% end %>
 
-            </div>
-            <div id=" avatar">
+              </div>
+            <div id="avatar">
               <% avatar_url = @animal.user.facebook_picture_url || "http://placehold.it/30x30" %>
               <%= image_tag avatar_url %>
             </div>
           </div>
 
           <div class="booking-form form-inline">
-            <%= simple_form_for [@animal, @booking] do |f| %>
-              <%= f.text_field :start_date, placeholder: "Start date", class: 'datepicker form-control'%>
-              <%= f.text_field :end_date, placeholder: "End date", class: 'datepicker form-control'%>
-              <%= f.button :submit, class: "btn-death" %>
+            <% if current_user == @animal.user %>
+              <p>You can't book your own animal.</p>
+            <% else %>
+              <%= simple_form_for [@animal, @booking] do |f| %>
+                <%= f.text_field :start_date, placeholder: "Start date", class: 'datepicker form-control'%>
+                <%= f.text_field :end_date, placeholder: "End date", class: 'datepicker form-control'%>
+                <%= f.button :submit, class: "btn-death" %>
+              <% end %>
             <% end %>
           </div>
 
@@ -101,7 +108,7 @@
             <% end %>
           </div>
         </div>
-        <div class="col-xs-4">
+        <div class="col-xs-5">
           <div class="image-container">
             <%= cl_image_tag @animal.photo, crop: :fill %>
           </div>

@@ -3,12 +3,20 @@ class AnimalsController < ApplicationController
   before_action :set_animal, only: [:show, :edit, :update, :destroy, :rating]
 
   def index
-    @animals = Animal.where.not(latitude: nil, longitude: nil)
-    @hash = Gmaps4rails.build_markers(@animals) do |animal, marker|
-      marker.lat animal.latitude
-      marker.lng animal.longitude
+    # @animals = Animal.where.not(latitude: nil, longitude: nil)
+      @animals = Animal.all
+    if params[:search_address].present?
+      @animals = @animals.near(params[:search_address], 2)
     end
-      # marker.infowindow render_to_string(partial: "/animals/map_box", locals: { animal: animal })
+    if params[:search_animal].present?
+      @animals = @animals.select { |animal| animal.title.downcase.include?(params[:search_animal].downcase) }
+    end
+    @hash = Gmaps4rails.build_markers(@animals) do |animal, marker|
+        marker.lat animal.latitude
+        marker.lng animal.longitude
+        marker.infowindow render_to_string(partial: "/animals/map_box", locals: { animal: animal })
+
+      end
   end
 
   def show

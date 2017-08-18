@@ -6,13 +6,29 @@
     padding: 0;
     padding-top: 10px;
   }
-
 }
 
 .user-section {
   padding-top: 20px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  h3 {
+    margin: 0;
+  }
+}
+
+.user-info {
+  display: flex;
+  justify-content: space-between;
+  p {
+    color: black;
+    padding: 0px 10px;
+    margin: 0;
+    :hover {
+      text-decoration: $natgeo;
+    }
+  }
 }
 
 .bottom-border {
@@ -28,9 +44,9 @@
   }
 }
 
-.animal-actions {
+.title {
   font-size: 30px;
-  align-text: right;
+  display: flex;
   a {
     color: black;
     text-decoration: none;
@@ -45,10 +61,13 @@
 
 #avatar {
   padding-top: 10px;
+  border-radius: 50%;
 }
 
 .image-container {
-  width: 100%;
+  img {
+    width: 100%;
+  }
   padding-top: 20px;
   position: sticky;
   top: 0;
@@ -56,6 +75,10 @@
 
 .row-content {
   display: flex;
+}
+
+.fa {
+  color: $natgeo;
 }
 
 

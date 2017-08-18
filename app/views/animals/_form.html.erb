@@ -1,16 +1,18 @@
 <div class="container">
-  <div class="row">
-    <div class="col-xs-4 col-xs-offset-4">
-      <div class="animal-form">
-        <%= simple_form_for @animal do |f| %>
-          <%= f.input :title, placeholder: "Title", label: false, class: 'form-control' %>
-          <%= f.input :address, placeholder: "Address", label: false, class: 'form-control' %>
-          <%= f.input :daily_price, placeholder: "Daily price (in €)", label: false, class: 'form-control' %>
-          <%= f.input :description, placeholder: "Description", label: false, class: 'form-control' %>
-          <%= f.input :photo %>
-          <%= f.input :photo_cache, as: :hidden %>
-          <%= f.button :submit, class: "btn form-control btn-success" %>
-        <% end %>
+  <div class="form-wrapper">
+    <div class="row">
+      <div class="col-xs-6 col-xs-offset-3">
+        <div class="animal-form">
+          <%= simple_form_for @animal do |f| %>
+            <%= f.input :title, placeholder: "Title", label: false, class: 'form-control' %>
+            <%= f.input :address, placeholder: "Address", label: false, class: 'form-control' %>
+            <%= f.input :daily_price, placeholder: "Daily price (in €)", label: false, class: 'form-control' %>
+            <%= f.input :description, placeholder: "Description", label: false, class: 'form-control' %>
+            <%= f.input :photo %>
+            <%= f.input :photo_cache, as: :hidden %>
+            <%= f.button :submit, class: "form-control btn-death" %>
+          <% end %>
+        </div>
       </div>
     </div>
   </div>

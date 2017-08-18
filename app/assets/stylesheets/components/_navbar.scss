@@ -22,6 +22,7 @@
   height: 35px;
   width: 35px;
   border-radius: 50%;
+  margin-bottom: 20px;
 }
 
 /* Right section */
@@ -40,10 +41,11 @@
 /* Navbar link */
 .navbar-wagon-link {
   color: white;
-  font-size: 14px;
+  font-size: 18px;
+  font-weight: bolder;
 }
 .navbar-wagon-link:hover {
-  color: #da552f;
+  color: $natgeo;
   text-decoration: none;
 }
 
@@ -57,7 +59,7 @@
   transition: color 0.3s ease;
   font-weight: lighter !important;
   color: #999999 !important;
-  font-size: 15px !important;
+  font-size: 18px !important;
   line-height: 22px !important;
   padding: 10px 20px;
 }
