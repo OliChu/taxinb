@@ -5,7 +5,7 @@
         <div class="animal-form">
           <%= simple_form_for @animal do |f| %>
             <%= f.input :title, placeholder: "Title", label: false, class: 'form-control' %>
-            <%= f.input :address, placeholder: "Address", label: false, class: 'form-control' %>
+            <%= f.input :address, placeholder: "Address", label: false, class: 'form-control', id: 'address_input' %>
             <%= f.input :daily_price, placeholder: "Daily price (in €)", label: false, class: 'form-control' %>
             <%= f.input :description, placeholder: "Description", label: false, class: 'form-control' %>
             <%= f.input :photo %>
