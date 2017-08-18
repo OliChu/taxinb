@@ -1,48 +1,49 @@
 <div class="wrapper">
   <div class="container">
     <div class="row">
+    <% if @animals.blank? %>
+      <h2>Search results</h2>
+      <h4>There are no offers containing your terms or near this location.</h4>
+    <% else %>
       <div class="col-md-8 col-xs-4 row-titles">
-        <h2>Our traditional skin-mounts</h2>
+        <h2>Available animals</h2>
       </div>
     </div>
-    <% if @animals.blank? %>
-      <h4>There are no offers containing your terms.</h4>
-    <% else %>
 
     <div class="row">
       <div class="col-xs-6 col-sm-8">
        <div class="row">
         <% @animals.each do |animal| %>
-        <%= link_to animal_path(animal) do %>
-        <div class="col-xs-8 col-sm-6 col-md-4   ">
-          <div class="card-container">
-            <div class="card " style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= cl_image_path animal.photo, crop: :fill %>')">
-              <div class="card-name"><%= animal.title %></div>
-            </div>
-            <div class="card-info">
-              <p id="price"><%= animal.daily_price %>€ / day</p>
-              <div class="stars">
-                <p id="rating">Rating:</p>
-                <% if animal.rating == 0 %>
-                <p id="no-review">Not rated yet</p>
-                <% else %>
-                <ul class="list-inline">
-                  <% animal.rating[0].times do %>
-                  <li><i class="fa fa-star" aria-hidden="true"></i></li>
+          <%= link_to animal_path(animal) do %>
+          <div class="col-xs-8 col-sm-6 col-md-4   ">
+            <div class="card-container">
+              <div class="card " style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= cl_image_path animal.photo, crop: :fill %>')">
+                <div class="card-name"><%= animal.title %></div>
+              </div>
+              <div class="card-info">
+                <p id="price"><%= animal.daily_price %>€ / day</p>
+                <div class="stars">
+                  <p id="rating">Rating:</p>
+                  <% if animal.rating == 0 %>
+                  <p id="no-review">Not rated yet</p>
+                  <% else %>
+                  <ul class="list-inline">
+                    <% animal.rating[0].times do %>
+                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                    <% end %>
+                    <% if animal.rating[1] != 0 %>
+                    <li><i class="fa fa-star-half-o" aria-hidden="true"></i></li>
+                    <% end %>
+                    <% animal.rating[2].times do %>
+                    <li><i class="fa fa-star-o" aria-hidden="true"></i></li>
+                    <% end %>
+                  </ul>
                   <% end %>
-                  <% if animal.rating[1] != 0 %>
-                  <li><i class="fa fa-star-half-o" aria-hidden="true"></i></li>
-                  <% end %>
-                  <% animal.rating[2].times do %>
-                  <li><i class="fa fa-star-o" aria-hidden="true"></i></li>
-                  <% end %>
-                </ul>
-                <% end %>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <% end %>
+          <% end %>
         <% end %>
       </div>
     </div>
