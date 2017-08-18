@@ -42,8 +42,6 @@
           <h2>Bookings</h2>
           <div class="message-container">
             <% @animals.order("created_at desc").each do |booking| %>
-
-                <%= link_to animal_path(booking.animal) do %>
                 <div class="message">
                   <% avatar_url = booking.user.facebook_picture_url || "http://placehold.it/30x30" %>
                   <%= image_tag avatar_url, class: "avatar" %>
@@ -55,12 +53,12 @@
                     <p><strong><%= booking.animal.title %></strong></p>
                     <h3><strong><%= (booking.end_date - booking.start_date).to_i %> days</strong>, from <%= booking.start_date %> to <%= booking.end_date %></h3>
                   </div>
-                  <div class="message-actions">
-                    <% if booking.status == "Pending" %>
+                  <% if (booking.status == "Pending") %>
+                    <div class="message-actions">
                       <%= link_to "Accept", animal_booking_path(booking.animal, booking, redirect: profile_animals_path, status: "Accepted"), method: :patch, class: "form-control btn-death" %>
                       <%= link_to "Decline", animal_booking_path(booking.animal, booking, redirect: profile_animals_path, status: "Declined"), method: :patch, class: "form-control btn-death" %>
-                    <% end %>
-                  </div>
+                    </div>
+                  <% end %>
                   <div class="message-status">
                     <% if booking.status == "Pending"  %>
                       <p class="status pending"><%= booking.status %></p>
@@ -72,8 +70,6 @@
                     <p class="price"><%= booking.price %>€</p>
                   </div>
                 </div>
-                <% end %>
-
             <% end %>
           </div>
         </div>
