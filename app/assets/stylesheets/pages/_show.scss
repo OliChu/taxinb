@@ -92,7 +92,7 @@
 
 .message-name2 {
   padding-left: 10px;
-  min-width: 100px;
+  max-width: 100px;
   color: rgba(0,0,0,0.7);
   h4 {
     font-size: 18px;
@@ -108,3 +108,11 @@
   }
 }
 
+.message-status {
+  font-size: 14px;
+  font-weight: bold;
+  color: rgba(0,0,0,0.7);
+  ul {
+    min-width: 80px;
+  }
+}
