@@ -4,30 +4,20 @@ class AnimalsController < ApplicationController
 
   def index
     # @animals = Animal.where.not(latitude: nil, longitude: nil)
-
-    if params[:search]
-      @animals = Animal.search(params[:search]).order("created_at DESC")
-      @hash = Gmaps4rails.build_markers(@animals) do |animal, marker|
-        marker.lat animal.latitude
-        marker.lng animal.longitude
-      end
-    else
-      @animals = Animal.all.order("created_at DESC")
-      @hash = Gmaps4rails.build_markers(@animals) do |animal, marker|
-        marker.lat animal.latitude
-        marker.lng animal.longitude
-      end
+      @animals = Animal.all
+    if params[:address].present?
+      @animals = @animals.near(params[:address], 2)
     end
-  end
+    if params[:animal].present?
+      @animals = @animals.select { |animal| animal.title.downcase.include?(params[:animal].downcase) }
+    end
+    @hash = Gmaps4rails.build_markers(@animals) do |animal, marker|
+        marker.lat animal.latitude
+        marker.lng animal.longitude
+        marker.infowindow render_to_string(partial: "/animals/map_box", locals: { animal: animal })
 
-  # def index
-  #   @animals = Animal.where.not(latitude: nil, longitude: nil)
-  #   @hash = Gmaps4rails.build_markers(@animals) do |animal, marker|
-  #     marker.lat animal.latitude
-  #     marker.lng animal.longitude
-  #   end
-  #     # marker.infowindow render_to_string(partial: "/animals/map_box", locals: { animal: animal })
-  # end
+      end
+  end
 
   def show
     @booking = Booking.new
