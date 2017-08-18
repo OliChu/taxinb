@@ -8,8 +8,8 @@
 
   <div class="searchbar form-inline ">
     <%= form_tag(animals_path, :method => "get", id: "search-form") do %>
-    <%= text_field_tag :animal, params[:animal], placeholder: "Search by animal", class: 'form-control' %>
-    <%= text_field_tag :address, params[:address], placeholder: "Search by address", class: 'form-control' %>
+    <%= text_field_tag :search_animal, params[:search_animal], placeholder: "Search by animal", class: 'form-control' %>
+    <%= text_field_tag :search_address, params[:search_address], placeholder: "Search by address", class: 'form-control' %>
     <%= submit_tag "Search", :name => nil, class: 'btn btn-death' %>
     <% end %>
   </div>

@@ -5,11 +5,11 @@ class AnimalsController < ApplicationController
   def index
     # @animals = Animal.where.not(latitude: nil, longitude: nil)
       @animals = Animal.all
-    if params[:address].present?
-      @animals = @animals.near(params[:address], 2)
+    if params[:search_address].present?
+      @animals = @animals.near(params[:search_address], 2)
     end
-    if params[:animal].present?
-      @animals = @animals.select { |animal| animal.title.downcase.include?(params[:animal].downcase) }
+    if params[:search_animal].present?
+      @animals = @animals.select { |animal| animal.title.downcase.include?(params[:search_animal].downcase) }
     end
     @hash = Gmaps4rails.build_markers(@animals) do |animal, marker|
         marker.lat animal.latitude
