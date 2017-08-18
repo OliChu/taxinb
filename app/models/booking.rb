@@ -5,11 +5,11 @@ class Booking < ApplicationRecord
   validates :start_date, :end_date, :user_id, :animal_id, presence: true
 
   def accept
-    self.status = "accepted"
+    self.status = "Accepted"
   end
 
   def decline
-    self.status = "declined"
+    self.status = "Declined"
   end
 
 end

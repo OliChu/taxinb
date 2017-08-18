@@ -34,11 +34,16 @@ class BookingsController < ApplicationController
   end
 
   def update
+    @animal = Animal.find(params[:animal_id])
     @booking = Booking.find(params[:id])
     @booking.update(booking_params)
     @booking.price = (@booking.end_date - @booking.end_date) * @animal.daily_price
     @animal = @booking.animal
-    redirect_to animal_path(@animal)
+    if params[:redirect].present?
+      redirect_to params[:redirect]
+    else
+      redirect_to animal_path(@animal)
+    end
   end
 
   def destroy

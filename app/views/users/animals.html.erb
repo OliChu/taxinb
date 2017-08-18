@@ -55,8 +55,20 @@
                     <p><strong><%= booking.animal.title %></strong></p>
                     <h3><strong><%= (booking.end_date - booking.start_date).to_i %> days</strong>, from <%= booking.start_date %> to <%= booking.end_date %></h3>
                   </div>
+                  <div class="message-actions">
+                    <% if booking.status == "Pending" %>
+                      <%= link_to "Accept", animal_booking_path(booking.animal, booking, redirect: profile_animals_path, status: "Accepted"), method: :patch, class: "form-control btn-death" %>
+                      <%= link_to "Decline", animal_booking_path(booking.animal, booking, redirect: profile_animals_path, status: "Declined"), method: :patch, class: "form-control btn-death" %>
+                    <% end %>
+                  </div>
                   <div class="message-status">
-                    <p class="status pending"><%= booking.status %></p>
+                    <% if booking.status == "Pending"  %>
+                      <p class="status pending"><%= booking.status %></p>
+                    <% elsif booking.status == "Accepted"  %>
+                      <p class="status accepted"><%= booking.status %></p>
+                    <% elsif booking.status == "Declined"  %>
+                      <p class="status declined"><%= booking.status %></p>
+                    <% end %>
                     <p class="price"><%= booking.price %>€</p>
                   </div>
                 </div>
