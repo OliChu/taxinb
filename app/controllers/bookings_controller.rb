@@ -5,9 +5,10 @@ class BookingsController < ApplicationController
     @bookings = Booking.all.current_user
   end
 
-  # def show
-  #   @booking = Booking.find(params[:id])
-  # end
+  def show
+    # @booking = Booking.find(params[:id])
+    @animal = Animal.find(params[:animal_id])
+  end
 
   def new
     @animal = Animal.find(params[:animal_id])
@@ -22,7 +23,7 @@ class BookingsController < ApplicationController
     @booking.price = (@booking.end_date - @booking.start_date).to_i * @animal.daily_price
     @booking.status = "Pending"
     if @booking.save
-      redirect_to animal_path(@animal)
+      redirect_to animal_booking_path(@animal, @booking.user)
     else
       render 'new'
     end

@@ -1,3 +1,36 @@
-.aimg{
-  border: 8px solid $natgeo;
+
+.animal-show{
+  height: 50vh;
+  width: 100%;
+  margin-top: 30px;
+  background-color: white;
+  padding: 20px;
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+  border-radius: 3px;
+  // flex-direction: column;
 }
+
+.photocontent{
+  display: flex;
+  justify-content: space-between;
+}
+
+.animal-image{
+  height: 200px;
+  width: 200px;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.6);
+  background-size: cover !important;
+  background-position: center;
+  color: white;
+  position: relative;
+  margin: 0;
+  // margin-bottom: 20px;
+  border-radius: 5px;
+  border: 8px solid #FFCD05;
+}
+
+.textbook{
+  padding-left: 30px;
+}
+
+
