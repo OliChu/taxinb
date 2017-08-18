@@ -12,8 +12,11 @@
   </head>
   <body>
     <div class="page-content">
+      <% unless current_page?(root_path) %>
+        <%= render 'shared/navbar' %>
+      <% end %>
       <%= render 'shared/flashes' %>
-      <%= render 'shared/navbar' %>
+      <%# render 'shared/navbar' %>
       <%= yield %>
     </div>
     <%= render 'shared/footer' %>
