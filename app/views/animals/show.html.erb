@@ -8,7 +8,7 @@
               <div class="col-xs-12">
                 <div class="title">
                   <h1><%= @animal.title %></h1>
-                  <h1 id="show-price"><%= @animal.daily_price %>€/day</h1>
+                  <h1><%= @animal.daily_price %>€/day</h1>
                 </div>
                 <div class="stars">
                     <p id="rating">Rating:</p>
@@ -30,7 +30,7 @@
                 </div>
                 <p> <%= @animal.description %> </p>
               <div class="user-section">
-                  <h3>Property of</h3>
+                  <h3>Property of:</h3>
                   <div class="user-info">
                     <p><strong><%= @animal.user.first_name %> <%= @animal.user.last_name %></strong></p>
                     <p><%= @animal.user.nb_reviews %> Reviews</p>
@@ -46,9 +46,9 @@
           </div>
 
 
-          <div class="booking-form form-inline">
+          <div class="bottom-border booking-form form-inline">
             <% if current_user == @animal.user %>
-              <h3>Modify options:</h3>
+              <h3>Your options:</h3>
               <%= link_to edit_animal_path(@animal) do %>
                 <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
               <% end %>

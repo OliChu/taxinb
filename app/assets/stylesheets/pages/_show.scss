@@ -39,9 +39,6 @@
   font-size: 30px;
   display: flex;
   justify-content: space-between;
-  #show-price {
-    border-bottom: 5px solid $natgeo;
-  }
 }
 
 .booking-form {
@@ -80,5 +77,11 @@
   color: $natgeo;
 }
 
+.aimg {
+  border: 8px solid $natgeo;
+}
 
-
+#available {
+  border-bottom: 2px solid black;
+  margin-bottom: 30px;
+}
