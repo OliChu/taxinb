@@ -1,0 +1,15 @@
+<div class="container">
+  <div class="form-wrapper">
+    <div class="row">
+      <div class="col-xs-6 col-xs-offset-3">
+        <div class="animal-form">
+          <%= simple_form_for [@animal, @booking, @review] do |f| %>
+            <%= f.input :comment, placeholder: "Tell us about your experience", label: false, class: 'form-control' %>
+            <%= f.input :rating, collection: 1..5, as: :radio_buttons, class: 'form-inline' %>
+            <%= f.button :submit, class: "form-control btn-death" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

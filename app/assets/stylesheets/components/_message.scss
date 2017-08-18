@@ -58,6 +58,15 @@
   margin-bottom: 0px;
 }
 
+.message-actions {
+  min-width: 30px;
+  display: flex;
+  align-items: center;
+}
+.message-actions a {
+  margin-right: 10px;
+}
+
 .message-status {
   font-size: 14px;
   font-weight: bold;

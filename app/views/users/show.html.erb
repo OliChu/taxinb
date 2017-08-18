@@ -3,28 +3,36 @@
 <div class="wrapper">
 
   <div class="container">
-    <% if @user.bookings.any? { |booking| booking.end_date.to_time.to_i >= Time.now.to_i && booking.status != "declined"} %>
+    <% if @user.bookings.any? { |booking| booking.end_date.to_time.to_i >= Time.now.to_i } %>
       <div class="row">
         <div class="col-xs-12">
           <div class="message-container">
             <% @user.bookings.order("created_at desc").each do |booking| %>
-              <%= link_to animal_path(booking.animal) do %>
-              <div class="message">
-                <% avatar_url = booking.animal.user.facebook_picture_url || "http://placehold.it/30x30" %>
-                <%= image_tag avatar_url, class: "avatar" %>
-                <div class="message-name">
-                  <h2><%= booking.animal.user.first_name %> <%= booking.animal.user.last_name %></h2>
-                  <p><%= booking.created_at.to_date %></p>
+              <% if booking.end_date.to_time.to_i >= Time.now.to_i %>
+                <%= link_to animal_path(booking.animal) do %>
+                <div class="message">
+                  <% avatar_url = booking.animal.user.facebook_picture_url || "http://placehold.it/30x30" %>
+                  <%= image_tag avatar_url, class: "avatar" %>
+                  <div class="message-name">
+                    <h2><%= booking.animal.user.first_name %> <%= booking.animal.user.last_name %></h2>
+                    <p><%= booking.created_at.to_date %></p>
+                  </div>
+                  <div class="message-body">
+                    <p><strong><%= booking.animal.title %></strong></p>
+                    <h3><strong><%= (booking.end_date - booking.start_date).to_i %> days</strong>, from <%= booking.start_date %> to <%= booking.end_date %></h3>
+                  </div>
+                  <div class="message-status">
+                    <% if booking.status == "Pending"  %>
+                      <p class="status pending"><%= booking.status %></p>
+                    <% elsif booking.status == "Accepted"  %>
+                      <p class="status accepted"><%= booking.status %></p>
+                    <% elsif booking.status == "Declined"  %>
+                      <p class="status declined"><%= booking.status %></p>
+                    <% end %>
+                    <p class="price"><%= booking.price %>€</p>
+                  </div>
                 </div>
-                <div class="message-body">
-                  <p><strong><%= booking.animal.title %></strong></p>
-                  <h3><strong><%= (booking.end_date - booking.start_date).to_i %> days</strong>, from <%= booking.start_date %> to <%= booking.end_date %></h3>
-                </div>
-                <div class="message-status">
-                  <p class="status pending"><%= booking.status %></p>
-                  <p class="price"><%= booking.price %>€</p>
-                </div>
-              </div>
+                <% end %>
               <% end %>
             <% end %>
           </div>
@@ -90,5 +98,4 @@
         <% end %>
       </div>
   </div>
-
 </div>
