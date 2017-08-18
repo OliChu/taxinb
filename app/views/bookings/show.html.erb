@@ -1,0 +1,20 @@
+<div class="wrapper">
+  <div class="container">
+    <div class="col-xs-6 col-xs-offset-3 ">
+      <div class="animal-show">
+        <div class="btitle">
+          <h3>Your Booking is confirmed!</h1>
+        </div>
+        <div class="photocontent">
+          <div class="animal-image" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= cl_image_path @animal.photo, crop: :fill %>')"></div>
+          <div class="textbook">
+            <h3>You can pick up </h2>
+            <h4><%= @animal.title %></h3>
+            <p>at <%= @animal.address %></p>
+              <%= link_to "Your bookings", profile_bookings_path, id: "price"%>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
