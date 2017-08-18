@@ -65,37 +65,39 @@
         </div>
       </div>
     <% end %>
-    <div class="row">
-      <div class="col-xs-12">
-        <% @user.bookings.order("end_date desc").each do |booking| %>
-          <% if booking.review %>
-            <div class="message">
-              <% avatar_url = booking.animal.user.facebook_picture_url || "http://placehold.it/30x30" %>
-              <%= image_tag avatar_url, class: "avatar" %>
-              <div class="message-name">
-                <h2><%= booking.animal.user.first_name %> <%= booking.animal.user.last_name %></h2>
-              </div>
-              <div class="message-body">
-                <p><%= booking.review.comment %></p>
-                <h3><%= booking.animal.title %> from <%= booking.start_date %> to <%= booking.end_date %></h3>
-              </div>
-              <div class="stars">
-                <ul class="list-inline">
-                  <% booking.animal.rating[0].times do %>
-                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                  <% end %>
-                  <% if booking.animal.rating[1] != 0 %>
-                    <li><i class="fa fa-star-half-o" aria-hidden="true"></i></li>
-                  <% end %>
-                  <% booking.animal.rating[2].times do %>
-                    <li><i class="fa fa-star-o" aria-hidden="true"></i></li>
-                  <% end %>
-                </ul>
-              </div>
-              </div>
+
+  <div class="row">
+    <div class="col-xs-12">
+      <% @user.bookings.order("end_date desc").each do |booking| %>
+        <% if booking.review %>
+          <div class="message">
+            <% avatar_url = booking.animal.user.facebook_picture_url || "http://placehold.it/30x30" %>
+            <%= image_tag avatar_url, class: "avatar" %>
+            <div class="message-name">
+              <h2><%= booking.animal.user.first_name %> <%= booking.animal.user.last_name %></h2>
             </div>
-          <% end %>
+            <div class="message-body">
+              <p><%= booking.review.comment %></p>
+              <h3><%= booking.animal.title %> from <%= booking.start_date %> to <%= booking.end_date %></h3>
+            </div>
+            <div class="stars">
+              <ul class="list-inline">
+                <% booking.animal.rating[0].times do %>
+                  <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                <% end %>
+                <% if booking.animal.rating[1] != 0 %>
+                  <li><i class="fa fa-star-half-o" aria-hidden="true"></i></li>
+                <% end %>
+                <% booking.animal.rating[2].times do %>
+                  <li><i class="fa fa-star-o" aria-hidden="true"></i></li>
+                <% end %>
+              </ul>
+            </div>
+            </div>
         <% end %>
-      </div>
+      <% end %>
+    </div>
+  </div>
+
   </div>
 </div>
